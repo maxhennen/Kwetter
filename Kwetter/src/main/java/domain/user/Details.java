@@ -1,8 +1,19 @@
 package domain.user;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "details")
 public class Details {
+
+    @GeneratedValue
+    @Id
+    private long id;
+    @Column(name = "bio")
     private String bio;
+    @Column(name = "website")
     private String website;
+    @OneToOne(mappedBy = "location")
     private Location location;
 
     public Details(String bio, String website, Location location) {
@@ -21,5 +32,14 @@ public class Details {
 
     public Location getLocation() {
         return location;
+    }
+
+    @Override
+    public String toString() {
+        return "Details{" +
+                "bio='" + bio + '\'' +
+                ", website='" + website + '\'' +
+                ", location=" + location +
+                '}';
     }
 }

@@ -1,18 +1,33 @@
 package domain.user;
 
-import javax.xml.soap.Detail;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "user")
 public class User {
 
+    @GeneratedValue
+    @Id
     private long id;
+    @Column(name = "username")
     private String username;
+    @Column(name = "name")
     private String name;
+    @Column(name = "email")
     private String email;
+    @Column(name = "password") @Ignore
+    private String password;
+    @Column(name = "roles")
     private List<Role> roles;
+    @OneToOne(mappedBy = "details")
     private Details details;
+    @OneToMany(mappedBy = "user")
     private List<User> followers;
+    @OneToMany(mappedBy = "user")
     private List<User> following;
 
     public User(long id, String username, String name, String email, List<Role> roles, Details details) {
