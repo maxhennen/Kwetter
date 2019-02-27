@@ -1,40 +1,96 @@
 package service;
 
+import dao.kweet.KweetDAO;
+import dao.kweet.KweetDAOImpl;
+import dao.user.UserDAO;
+import dao.user.UserDAOImpl;
 import domain.Kweet;
+import domain.user.User;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.List;
 
-public interface KweetService {
+@Stateless
+public class KweetService {
+
+    @Inject
+    private KweetDAO kweetDAO;
+
+    @Inject
+    private UserDAO userDAO;
 
     /**
-     * Gets all kweets from the database
-     * @return List<Kweet> List of all kweets in the database
+     * Used for testing only!
+     *
+     * @param dao
      */
-    List<Kweet> findAll();
+    public void setKweetDAO(KweetDAO dao) {
+        kweetDAO = dao;
+    }
 
     /**
-     * Saves a kweet to the database
-     * @param kweet The kweet that has to be saved
+     * Used for testing only!
+     *
+     * @param dao
      */
-    void save(Kweet kweet);
+    public void setUserDAO(UserDAO dao) {
+        userDAO = dao;
+    }
 
     /**
-     * Gets a kweet by a specific id
-     * @param id Id of the kweet that has to be found
-     * @return The found kweet
+     * saves a kweet and add it to the user
+     * @param kweet
      */
-    Kweet findOneById(long id);
+    public void createKweet(Kweet kweet){
+        User user = kweet.getUser();
+        user.addKweet(kweet);
+        kweetDAO.create(kweet);
+        userDAO.editUser(user);
+    }
 
     /**
-     * Deletes a kweet by  id
-     * @param id Id of the to be deleted kweet
+     * Updates a kweet
+     * @param kweet
      */
-    void delete (long id);
+    public void editKweet(Kweet kweet){
+        kweetDAO.edit(kweet);
+    }
 
     /**
-     * Gets all kweets by an username
-     * @param username Username from the desired kweets
-     * @return List<Kweet> Kweets by specific username
+     * Removes kweet
+     * @param kweet
      */
-    List<Kweet>  findByUserUsername(String username);
+    public void removeKweet(Kweet kweet){
+        User user = kweet.getUser();
+        user.removeKweet(kweet);
+        userDAO.editUser(user);
+        kweetDAO.removeKweet(kweet);
+    }
+
+    /**
+     * retrieves all kweets
+     * @return
+     */
+    public List<Kweet> getAllKweets(){
+        return kweetDAO.findAll();
+    }
+
+    /**
+     * Retrieves a kweet by id
+     * @param id
+     * @return
+     */
+    public Kweet getKweetById(long id){
+        return kweetDAO.get(id);
+    }
+
+    /**
+     * Retrieves all kweets from an username
+     * @param username
+     * @return
+     */
+    public List<Kweet> getKweetsByUsername(String username){
+        return kweetDAO.getKweetsByUsername(username);
+    }
 }

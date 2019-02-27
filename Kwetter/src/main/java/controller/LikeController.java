@@ -1,37 +1,59 @@
 package controller;
 
 import domain.Like;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import service.LikeServiceImpl;
+import service.KweetService;
+import service.LikeService;
+import service.UserService;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Application;
+import java.time.LocalDateTime;
 import java.util.List;
 
-@RequestMapping("/like")
-public class LikeController {
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-    @Autowired
-    private LikeServiceImpl likeService;
+@ApplicationPath("/api")
+@Stateless
+@Path("/like")
+public class LikeController extends Application {
 
-    @RequestMapping("/findAll")
+    @Inject
+    private LikeService likeService;
+
+    @Inject
+    private UserService userService;
+
+    @Inject
+    private KweetService kweetService;
+
+    @GET
+    @Path("/findAll")
+    @Produces(APPLICATION_JSON)
     public List<Like> findAll(){
-        return likeService.findAll();
+        return likeService.findALlLikes();
     }
 
-    @RequestMapping("/save")
-    public void save(@RequestParam("like") Like like){
-        likeService.save(like);
+    @POST
+    @Path("/save")
+    @Consumes(APPLICATION_JSON)
+    public void save(@FormParam("username") String username, @FormParam("id") long kweetId){
+        Like like = new Like(LocalDateTime.now(), userService.findByUsername(username), kweetService.getKweetById(kweetId));
+        likeService.createLike(like);
     }
 
-    @RequestMapping("/findOneById")
-    public Like findOneById(@RequestParam("id") long id){
-        return likeService.findOneById(id);
+    @GET
+    @Path("/findOneById{id}")
+    @Produces(APPLICATION_JSON)
+    public Like findOneById(@PathParam("id") long id){
+        return likeService.getById(id);
     }
 
-    @RequestMapping("/delete")
-    public void delete(@RequestParam("id") long id){
-        likeService.delete(id);
+    @DELETE
+    @Path("/delete/{id}")
+    public void delete(@PathParam("id") long id){
+        likeService.removeLike(likeService.getById(id));
     }
 
 }

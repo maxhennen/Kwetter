@@ -1,41 +1,63 @@
 package controller;
 
 import domain.Kweet;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import service.KweetServiceImpl;
+import service.KweetService;
+import service.UserService;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Application;
+import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "/kweet")
-public class KweetController {
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-    @Autowired
-    private KweetServiceImpl kweetService;
+@ApplicationPath("/api")
+@Stateless
+@Path("/kweet")
+public class KweetController extends Application {
 
-    @RequestMapping("/findAll")
+    @Inject
+    private KweetService kweetService;
+
+    @Inject
+    private UserService userService;
+
+    @GET
+    @Path("/findAll")
+    @Produces(APPLICATION_JSON)
     public List<Kweet> findAll(){
-        return kweetService.findAll();
+        return kweetService.getAllKweets();
     }
 
-    @RequestMapping("/save")
-    public void save(@RequestParam("kweet") Kweet kweet){
-        kweetService.save(kweet);
+    @POST
+    @Path("/save")
+    @Consumes(APPLICATION_JSON)
+    public void save(@FormParam("content") String content, @FormParam("username") String username ){
+        Kweet kweet = new Kweet(LocalDateTime.now(), content, userService.findByUsername(username));
+        kweetService.createKweet(kweet);
     }
 
-    @RequestMapping("/findById")
-    public Kweet findOneById(@RequestParam("id") long id){
-        return kweetService.findOneById(id);
+    @GET
+    @Path("/findById/{id}")
+    @Produces(APPLICATION_JSON)
+    public Kweet findOneById(@PathParam("id") long id){
+        return kweetService.getKweetById(id);
     }
 
-    @RequestMapping("/delete")
-    public void delete(@RequestParam("id") long id){
-        kweetService.delete(id);
+    @DELETE
+    @Path("/delete/{id}")
+    public void delete(@PathParam("id") long id){
+        Kweet kweet = kweetService.getKweetById(id);
+        kweetService.removeKweet(kweet);
     }
 
-    @RequestMapping("/findByUsername")
-    public List<Kweet> findByUsername(@RequestParam("username") String username){
-        return kweetService.findByUserUsername(username);
+    @GET
+    @Path("/findByUsername/{username}")
+    @Produces(APPLICATION_JSON)
+    public List<Kweet> findByUsername(@PathParam("username") String username){
+        return kweetService.getKweetsByUsername(username);
     }
+
 }

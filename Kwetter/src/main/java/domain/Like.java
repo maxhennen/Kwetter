@@ -19,11 +19,13 @@ public class Like {
     @OneToOne(mappedBy = "kweet")
     private Kweet kweet;
 
-    public Like(long id, LocalDateTime dateTime, User user, Kweet kweet) {
-        this.id = id;
+    public Like(LocalDateTime dateTime, User user, Kweet kweet) {
         this.dateTime = dateTime;
         this.user = user;
         this.kweet = kweet;
+    }
+
+    public Like() {
     }
 
     public long getId() {
@@ -40,6 +42,22 @@ public class Like {
 
     public Kweet getKweet() {
         return kweet;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setKweet(Kweet kweet) {
+        this.kweet = kweet;
     }
 
     @Override

@@ -1,11 +1,6 @@
 package domain.user;
 
-import org.springframework.data.annotation.Id;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "location")
@@ -21,9 +16,9 @@ public class Location {
     @Column(name = "street")
     private String street;
     @Column(name = "house_number")
-    private int house_number;
+    private String house_number;
 
-    public Location(String country, String city, String street, int house_number) {
+    public Location(String country, String city, String street, String house_number) {
         this.country = country;
         this.city = city;
         this.street = street;
@@ -42,8 +37,28 @@ public class Location {
         return street;
     }
 
-    public int getHouse_number() {
+    public String getHouse_number() {
         return house_number;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setHouse_number(String house_number) {
+        this.house_number = house_number;
     }
 
     @Override

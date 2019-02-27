@@ -1,33 +1,61 @@
 package service;
 
+import dao.kweet.KweetDAOImpl;
+import dao.like.LikeDAO;
+import dao.like.LikeDAOImpl;
+import dao.like.LikeDAOTest;
 import domain.Like;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.List;
 
-public interface LikeService {
+@Stateless
+public class LikeService {
+
+    @Inject
+    private LikeDAO likeDAO;
+
 
     /**
-     * Gets all likes from the database
-     * @return List<Like> List of all likes in the database
+     * Used for testing only!
+     *
+     * @param dao
      */
-    List<Like> findAll();
+    public void setLikeDAO(LikeDAOTest dao) {
+        likeDAO = dao;
+    }
 
     /**
-     * Stores a like in the database
-     * @param like The like to be stored
+     * Create a like
+     * @param like
      */
-    void save(Like like);
+    public void createLike(Like like){
+        likeDAO.create(like);
+    }
 
     /**
-     * Gets a like by a specific id
-     * @param id The id of the like you want
-     * @return The found like
+     * Removes a like
+     * @param like
      */
-    Like findOneById(Long id);
+    public void removeLike(Like like){
+        likeDAO.removeLike(like);
+    }
 
     /**
-     * Deletes a like from the database
-     * @param id Id of the like you want to remove
+     * Retrieves all likes
+     * @return
      */
-    void delete(long id);
+    public List<Like> findALlLikes(){
+        return likeDAO.findAll();
+    }
+
+    /**
+     * Retrieve the like by id
+     * @param id
+     * @return
+     */
+    public Like getById(long id){
+        return likeDAO.get(id);
+    }
 }

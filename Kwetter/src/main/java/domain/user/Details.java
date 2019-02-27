@@ -22,6 +22,11 @@ public class Details {
         this.location = location;
     }
 
+    public Details(String bio, String website) {
+        this.bio = bio;
+        this.website = website;
+    }
+
     public String getBio() {
         return bio;
     }
@@ -32,6 +37,18 @@ public class Details {
 
     public Location getLocation() {
         return location;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     @Override

@@ -1,42 +1,159 @@
 package service;
 
+import dao.kweet.KweetDAOImpl;
+import dao.user.UserDAO;
+import dao.user.UserDAOImpl;
+import domain.user.Details;
+import domain.user.Location;
 import domain.user.User;
-import repository.UserRepository;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 import java.util.List;
 
-public interface UserService {
+@Stateless
+public class UserService {
+
+    @Inject
+    private UserDAO userDAO;
+
 
     /**
-     * Gets all users from database
-     * @return List<User> List of all users
+     * Used for testing only!
+     *
+     * @param dao
      */
-    List<User> findAll();
+    public void setUserDAO(UserDAO dao) {
+        userDAO = dao;
+    }
 
     /**
-     * Saves an user into the database
-     * @param user the user to be save
+     * Creates a new user
+     * @param user
      */
-    void save(User user);
+    public void createUser(User user){
+
+        if(userDAO.findUserByUserName(user.getUsername()) == null){
+            userDAO.createUser(user);
+        }
+    }
 
     /**
-     * Gets an user by id
-     * @param id ID of the user that you want
-     * @return the found user
+     * Updates an user
+     * @param user
      */
-    User findOne(Long id);
+    public void editUser(User user){
+        if(userDAO.findUserByID(user.getId()) != null){
+            userDAO.editUser(user);
+        }
+    }
 
     /**
-     * Deletes an user from the database
-     * @param id Id of the user to be deleted
+     * Retrieves the users who the given user follows
+     * @param user
+     * @return List<User>
      */
-    void delete(Long id);
+    public List<User> getFollowing(User user){
+        return userDAO.getAllFollowing(user);
+    }
 
     /**
-     * Finds the users by an username
-     * @param username Username of the user you want
-     * @return List<User> Users with the username
+     * Retrieves the users who follows the given user
+     * @param user
+     * @return
      */
-    List<User> findByUsername(String username);
+    public List<User> getFollowers(User user){
+        return userDAO.getAllFollowers(user);
+    }
+
+    /**
+     * Removes the given user
+     * @param user
+     */
+    public void removeUser(User user){
+        userDAO.removeUser(user);
+    }
+
+    /**
+     * Retrieves all users
+     * @return
+     */
+    public List<User> getAllUsers(){
+        return userDAO.getAllUsers();
+    }
+
+    /**
+     * Retrieves a user by username
+     * @param username
+     * @return
+     */
+    public User findByUsername(String username){
+        return userDAO.findUserByUserName(username);
+    }
+
+    /**
+     * Retrieves a user by id
+     * @param id
+     * @return
+     */
+    public User findByID(long id){
+        return userDAO.findUserByID(id);
+    }
+
+    /**
+     * Follow another user
+     * @param follower person following someone
+     * @param following person being followed
+     */
+    public void followUser(User follower, User following){
+        follower.addFollowing(following);
+        userDAO.editUser(follower);
+        userDAO.editUser(following);
+    }
+
+    /**
+     * Stop following someone
+     * @param follower
+     * @param following
+     */
+    public void removeFollowing(User follower, User following){
+        follower.removeFollowing(following);
+        userDAO.editUser(follower);
+        userDAO.editUser(following);
+    }
+
+    /**
+     * Remove a follower
+     * @param follower
+     * @param following
+     */
+    public void removeFollower(User follower, User following){
+        follower.removeFollower(following);
+        userDAO.editUser(follower);
+        userDAO.editUser(following);
+    }
+
+    /**
+     * Change the bio
+     * @param username
+     * @param details
+     */
+    public void editDetails(String username, Details details){
+        User user = findByUsername(username);
+        user.setDetails(details);
+        userDAO.editUser(user);
+    }
+
+    /**
+     * Change location
+     * @param username
+     * @param location
+     */
+    public void editLocation(String username, Location location){
+        User user = findByUsername(username);
+        user.getDetails().setLocation(location);
+        userDAO.editUser(user);
+    }
+
 
 }

@@ -5,6 +5,7 @@ import jdk.nashorn.internal.ir.annotations.Ignore;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -23,11 +24,14 @@ public class Kweet {
     @OneToOne(mappedBy = "user")
     private User user;
 
-    public Kweet(LocalDateTime dateTime, String content, List<Like> likes, User user) {
+    public Kweet(LocalDateTime dateTime, String content, User user) {
         DateTime = dateTime;
         this.content = content;
-        this.likes = likes;
         this.user = user;
+        likes = new ArrayList<>();
+    }
+
+    public Kweet() {
     }
 
     public long getId() {
@@ -48,6 +52,26 @@ public class Kweet {
 
     public User getUser() {
         return user;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        DateTime = dateTime;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setLikes(List<Like> likes) {
+        this.likes = likes;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
