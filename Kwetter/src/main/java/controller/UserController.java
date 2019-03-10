@@ -1,12 +1,11 @@
 package controller;
 
-import domain.user.Details;
-import domain.user.Location;
-import domain.user.User;
+import domain.Details;
+import domain.Location;
+import domain.User;
 import service.UserService;
 
-import javax.ejb.PostActivate;
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
@@ -14,9 +13,8 @@ import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@ApplicationPath("/api")
-@Stateless
 @Path("/user")
+@ApplicationScoped
 public class UserController extends Application {
 
     @Inject

@@ -1,12 +1,13 @@
-package domain.user;
+package domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "location")
-public class Location {
+public class Location implements Serializable {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
     @Column(name = "county")
@@ -23,6 +24,9 @@ public class Location {
         this.city = city;
         this.street = street;
         this.house_number = house_number;
+    }
+
+    public Location() {
     }
 
     public String getCountry() {

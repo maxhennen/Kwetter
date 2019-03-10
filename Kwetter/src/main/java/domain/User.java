@@ -1,28 +1,30 @@
-package domain.user;
-
-import domain.Kweet;
-import jdk.nashorn.internal.ir.annotations.Ignore;
+package domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
     @Column(name = "name")
     private String name;
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
-    @Column(name = "password") @Ignore
+    @Column(name = "password")
     private String password;
-    @ManyToMany(mappedBy = "role")
+    @ManyToMany()
+    @JoinTable(name = "users_roles",
+                joinColumns = @JoinColumn(name = "Id", referencedColumnName = "id"),
+                inverseJoinColumns = @JoinColumn(name = "Id", referencedColumnName = "Id"),
+                uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})})
     private List<Role> roles;
     @OneToOne(mappedBy = "details")
     private Details details;
@@ -30,7 +32,7 @@ public class User {
     @JoinTable(name = "user_followers" ,joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "Id", nullable = false)
               , inverseJoinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "Id", nullable = false))
     private List<User> followers;
-    @ManyToMany(mappedBy = "user")
+    @ManyToMany
     private List<User> following;
 
     @OneToMany(mappedBy = "kweeter")

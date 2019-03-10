@@ -2,19 +2,17 @@ package service;
 
 import dao.user.UserDAOTest;
 import domain.Kweet;
-import domain.user.Details;
-import domain.user.Location;
-import domain.user.User;
+import domain.Details;
+import domain.Location;
+import domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)

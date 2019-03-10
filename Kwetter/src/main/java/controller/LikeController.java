@@ -5,7 +5,7 @@ import service.KweetService;
 import service.LikeService;
 import service.UserService;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
@@ -14,9 +14,8 @@ import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@ApplicationPath("/api")
-@Stateless
 @Path("/like")
+@ApplicationScoped
 public class LikeController extends Application {
 
     @Inject

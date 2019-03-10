@@ -1,15 +1,14 @@
 package domain;
 
-import domain.user.User;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "like")
-public class Like {
+public class Like implements Serializable {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
     @Column(name = "date_time")

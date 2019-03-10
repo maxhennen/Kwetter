@@ -1,14 +1,11 @@
 package service;
 
-import dao.kweet.KweetDAOTest;
-import dao.like.LikeDAO;
 import dao.like.LikeDAOTest;
-import dao.user.UserDAOTest;
 import domain.Kweet;
 import domain.Like;
-import domain.user.Details;
-import domain.user.Location;
-import domain.user.User;
+import domain.Details;
+import domain.Location;
+import domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

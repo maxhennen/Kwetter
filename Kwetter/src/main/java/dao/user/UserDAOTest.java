@@ -1,6 +1,6 @@
 package dao.user;
 
-import domain.user.User;
+import domain.User;
 
 import java.util.ArrayList;
 import java.util.List;

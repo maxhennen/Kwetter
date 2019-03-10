@@ -1,18 +1,16 @@
 package domain;
 
-import domain.user.User;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "kweet")
-public class Kweet {
+public class Kweet implements Serializable {
 
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
     @Column(name = "date_time")

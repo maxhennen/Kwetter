@@ -1,11 +1,9 @@
 package service;
 
-import dao.kweet.KweetDAOImpl;
 import dao.user.UserDAO;
-import dao.user.UserDAOImpl;
-import domain.user.Details;
-import domain.user.Location;
-import domain.user.User;
+import domain.Details;
+import domain.Location;
+import domain.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;

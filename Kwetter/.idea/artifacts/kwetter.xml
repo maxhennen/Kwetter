@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="kwetter">
+  <artifact type="war" build-on-make="true" name="kwetter">
     <output-path>$PROJECT_DIR$/out/artifacts/kwetter</output-path>
     <root id="archive" name="kwetter.war">
       <element id="directory" name="META-INF">

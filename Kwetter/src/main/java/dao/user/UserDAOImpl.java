@@ -1,15 +1,15 @@
 package dao.user;
 
-import domain.user.User;
+import domain.User;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-@Stateless
+@ApplicationScoped
 public class UserDAOImpl implements UserDAO{
 
     @PersistenceContext(unitName = "kwetter-db")
