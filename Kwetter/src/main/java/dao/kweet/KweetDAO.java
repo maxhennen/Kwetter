@@ -2,6 +2,7 @@ package dao.kweet;
 
 import domain.Kweet;
 
+import javax.ejb.Stateless;
 import java.util.List;
 
 public interface KweetDAO {

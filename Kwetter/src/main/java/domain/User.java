@@ -20,23 +20,28 @@ public class User implements Serializable {
     private String email;
     @Column(name = "password")
     private String password;
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "users_roles",
-                joinColumns = @JoinColumn(name = "Id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(name = "Id", referencedColumnName = "Id"),
+                joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+                inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "Id"),
                 uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})})
     private List<Role> roles;
-    @OneToOne(mappedBy = "details")
+    @OneToOne(mappedBy = "user")
     private Details details;
-    @ManyToMany
+    @OneToMany
     @JoinTable(name = "user_followers" ,joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "Id", nullable = false)
               , inverseJoinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "Id", nullable = false))
     private List<User> followers;
-    @ManyToMany
+    @OneToMany
+    @JoinTable(name = "user_following" ,joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "Id", nullable = false)
+            , inverseJoinColumns = @JoinColumn(name = "following_id", referencedColumnName = "Id", nullable = false))
     private List<User> following;
 
-    @OneToMany(mappedBy = "kweeter")
+    @OneToMany(mappedBy = "user")
     private List<Kweet> kweets;
+
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes;
 
     public User(long id, String username, String name, String email, List<Role> roles, Details details) {
         this.id = id;
@@ -53,6 +58,10 @@ public class User implements Serializable {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        followers = new ArrayList<>();
+        following = new ArrayList<>();
+        kweets = new ArrayList<>();
+        roles = new ArrayList<>();
     }
 
     public User() {
@@ -80,6 +89,10 @@ public class User implements Serializable {
 
     public Details getDetails() {
         return details;
+    }
+
+    public List<Kweet> getKweets() {
+        return kweets;
     }
 
     public void setId(long id) {
@@ -151,6 +164,7 @@ public class User implements Serializable {
     public void removeFollower(User follower) {
         for (User u:followers) if(u.getUsername().equals(follower.getUsername())) {
             followers.remove(u);
+            u.getFollowing().remove(this);
             break;
         }
     }

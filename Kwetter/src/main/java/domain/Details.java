@@ -14,10 +14,12 @@ public class Details implements Serializable {
     private String bio;
     @Column(name = "website")
     private String website;
-    @OneToOne(mappedBy = "location")
+    @OneToOne(mappedBy = "details")
     private Location location;
+    @OneToOne
+    private User user;
 
-    public Details(String bio, String website, Location location) {
+    public Details(String bio, String website, Location location, User user) {
         this.bio = bio;
         this.website = website;
         this.location = location;
@@ -53,6 +55,14 @@ public class Details implements Serializable {
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

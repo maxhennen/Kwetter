@@ -2,17 +2,20 @@ package dao.user;
 
 import domain.User;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
+@Default
 public class UserDAOImpl implements UserDAO{
 
-    @PersistenceContext(unitName = "kwetter-db")
+    @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
     @Override
@@ -32,7 +35,7 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public List<User> getAllUsers() {
-        return (List<User>) em.createQuery("SELECT U FROM User U");
+        return (List<User>) em.createQuery("SELECT U FROM User U").getResultList();
     }
 
     @Override

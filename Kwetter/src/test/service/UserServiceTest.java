@@ -46,8 +46,8 @@ public class UserServiceTest {
         testUser2 = new User();
         Location location2 = new Location("DE", "BER", "Joa", "4a");
         Details details2 = new Details("bio1", "website2");
-        details1.setLocation(location1);
-        testUser2.setDetails(details1);
+        details1.setLocation(location2);
+        testUser2.setDetails(details2);
         testUser2.setUsername("test12");
         testUser2.setId(1);
         testUser2.setFollowers(new ArrayList<User>());

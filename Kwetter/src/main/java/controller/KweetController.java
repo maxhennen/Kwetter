@@ -4,7 +4,7 @@ import domain.Kweet;
 import service.KweetService;
 import service.UserService;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
@@ -13,8 +13,8 @@ import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
+@ApplicationPath("/api")
 @Path("/kweet")
-@ApplicationScoped
 public class KweetController extends Application {
 
     @Inject

@@ -18,6 +18,8 @@ public class Location implements Serializable {
     private String street;
     @Column(name = "house_number")
     private String house_number;
+    @OneToOne
+    private Details details;
 
     public Location(String country, String city, String street, String house_number) {
         this.country = country;

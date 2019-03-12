@@ -2,9 +2,11 @@ package dao.user;
 
 import domain.User;
 
+import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
 import java.util.List;
 
+@Alternative
 public class UserDAOTest implements UserDAO {
 
     List<User> users = new ArrayList<>();

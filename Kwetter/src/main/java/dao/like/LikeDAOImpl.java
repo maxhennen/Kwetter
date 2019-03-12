@@ -4,15 +4,17 @@ import domain.Like;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
+@Default
 public class LikeDAOImpl implements LikeDAO {
 
-    @PersistenceContext(unitName = "kwetter-db")
+    @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
     @Override

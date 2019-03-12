@@ -2,9 +2,11 @@ package dao.kweet;
 
 import domain.Kweet;
 
+import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
 import java.util.List;
 
+@Alternative
 public class KweetDAOTest implements KweetDAO {
 
     List<Kweet> kweets = new ArrayList<>();

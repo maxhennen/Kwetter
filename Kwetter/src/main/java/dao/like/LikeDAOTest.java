@@ -2,9 +2,11 @@ package dao.like;
 
 import domain.Like;
 
+import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
 import java.util.List;
 
+@Alternative
 public class LikeDAOTest implements LikeDAO{
 
     List<Like> likes = new ArrayList<>();

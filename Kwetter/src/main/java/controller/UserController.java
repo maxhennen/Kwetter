@@ -2,19 +2,23 @@ package controller;
 
 import domain.Details;
 import domain.Location;
+import domain.Role;
 import domain.User;
 import service.UserService;
 
+import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/user")
-@ApplicationScoped
+@Stateless
 public class UserController extends Application {
 
     @Inject
@@ -29,16 +33,18 @@ public class UserController extends Application {
 
     @POST
     @Path("/createUser")
-    @Consumes(APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void save(@FormParam("username") String username, @FormParam("password") String password){
         User user = new User(username, password);
+        Role role = new Role("user");
+        user.getRoles().add(role);
         userService.createUser(user);
     }
 
     @GET
-    @Path("/findOneById/{id}")
-    @Consumes(APPLICATION_JSON)
-    public User findOneById(@PathParam("id") long id){
+    @Path("/findOneById")
+    @Produces(APPLICATION_JSON)
+    public User findOneById(@QueryParam("id") long id){
         return userService.findByID(id);
     }
 
@@ -50,24 +56,24 @@ public class UserController extends Application {
     }
 
     @GET
-    @Path("/findByUsername/{username}")
-    @Consumes(APPLICATION_JSON)
-    public void findByUsername(@PathParam("username") String username){
-        userService.findByUsername(username);
+    @Path("/findByUsername")
+    @Produces(APPLICATION_JSON)
+    public User findByUsername(@QueryParam("username") String username){
+        return userService.findByUsername(username);
     }
 
     @GET
-    @Path("/following/{username}")
+    @Path("/following")
     @Produces(APPLICATION_JSON)
-    public List<User> getFollowing(@PathParam("username") String username){
+    public List<User> getFollowing(@QueryParam("username") String username){
         User user = userService.findByUsername(username);
         return userService.getFollowing(user);
     }
 
     @GET
-    @Path("/followers/{username}")
+    @Path("/followers")
     @Produces(APPLICATION_JSON)
-    public List<User> getFollowers(@PathParam("username") String username){
+    public List<User> getFollowers(@QueryParam("username") String username){
         User user = userService.findByUsername(username);
         return userService.getFollowing(user);
     }

@@ -13,9 +13,9 @@ public class Like implements Serializable {
     private long id;
     @Column(name = "date_time")
     private LocalDateTime dateTime;
-    @OneToOne(mappedBy = "user")
+    @ManyToOne
     private User user;
-    @OneToOne(mappedBy = "kweet")
+    @ManyToOne
     private Kweet kweet;
 
     public Like(LocalDateTime dateTime, User user, Kweet kweet) {

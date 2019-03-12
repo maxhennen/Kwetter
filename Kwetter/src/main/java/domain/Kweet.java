@@ -17,9 +17,9 @@ public class Kweet implements Serializable {
     private LocalDateTime DateTime;
     @Column(name = "content")
     private String content;
-    @OneToMany(mappedBy = "like")
+    @OneToMany(mappedBy = "kweet")
     private List<Like> likes;
-    @OneToOne(mappedBy = "user")
+    @ManyToOne
     private User user;
 
     public Kweet(LocalDateTime dateTime, String content, User user) {

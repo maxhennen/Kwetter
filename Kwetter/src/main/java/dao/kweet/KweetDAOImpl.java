@@ -3,7 +3,11 @@ package dao.kweet;
 
 import domain.Kweet;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Alternative;
+import javax.enterprise.inject.Default;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -11,11 +15,12 @@ import javax.persistence.Query;
 import java.util.List;
 
 
-@ApplicationScoped
+@Stateless
+@Default
 public class KweetDAOImpl implements KweetDAO {
 
 
-    @PersistenceContext(unitName = "kwetter-db")
+    @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
     @Override
