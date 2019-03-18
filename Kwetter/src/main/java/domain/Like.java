@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Table(name = "like")
 public class Like implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
     @Column(name = "date_time")

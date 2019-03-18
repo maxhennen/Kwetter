@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @ApplicationPath("/api")
 @Path("/kweet")
+@Stateless
 public class KweetController extends Application {
 
     @Inject
@@ -32,7 +34,7 @@ public class KweetController extends Application {
 
     @POST
     @Path("/save")
-    @Consumes(APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void save(@FormParam("content") String content, @FormParam("username") String username ){
         Kweet kweet = new Kweet(LocalDateTime.now(), content, userService.findByUsername(username));
         kweetService.createKweet(kweet);

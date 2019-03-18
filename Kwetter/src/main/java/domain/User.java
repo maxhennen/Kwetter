@@ -1,5 +1,9 @@
 package domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.junit.Ignore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -9,33 +13,44 @@ import java.util.List;
 @Table(name = "user")
 public class User implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
+
     @Column(name = "username", unique = true)
     private String username;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "email", unique = true)
     private String email;
+
     @Column(name = "password")
     private String password;
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "users_roles",
-                joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-                inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "Id"),
+                joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+                inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "Id"),
                 uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role_id"})})
     private List<Role> roles;
-    @OneToOne(mappedBy = "user")
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.PERSIST)
     private Details details;
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_followers" ,joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "Id", nullable = false)
               , inverseJoinColumns = @JoinColumn(name = "follower_id", referencedColumnName = "Id", nullable = false))
+    @JsonIgnore
     private List<User> followers;
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_following" ,joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "Id", nullable = false)
             , inverseJoinColumns = @JoinColumn(name = "following_id", referencedColumnName = "Id", nullable = false))
+    @JsonIgnore
     private List<User> following;
+
 
     @OneToMany(mappedBy = "user")
     private List<Kweet> kweets;
@@ -62,9 +77,15 @@ public class User implements Serializable {
         following = new ArrayList<>();
         kweets = new ArrayList<>();
         roles = new ArrayList<>();
+        details = new Details();
     }
 
     public User() {
+        followers = new ArrayList<>();
+        following = new ArrayList<>();
+        kweets = new ArrayList<>();
+        roles = new ArrayList<>();
+        details = new Details();
     }
 
     public long getId() {
@@ -139,6 +160,14 @@ public class User implements Serializable {
         return following;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     /**
      * @param follow
      */
@@ -176,7 +205,6 @@ public class User implements Serializable {
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", roles=" + roles +
                 ", details=" + details +
                 '}';
     }
@@ -187,8 +215,6 @@ public class User implements Serializable {
     public void addKweet(Kweet kweet) {
         if (kweet != null && kweets != null) {
             kweets.add(kweet);
-//            if (kweet.getPoster() != this)
-//                kweet.setPoster(this);
         }
     }
 

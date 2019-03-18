@@ -1,6 +1,7 @@
 package dao.user;
 
 import domain.User;
+import utils.AuthenticationUtils;
 
 import javax.ejb.Stateless;
 import javax.enterprise.context.ApplicationScoped;
@@ -9,6 +10,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @Stateless
@@ -20,7 +23,14 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public void createUser(User u) {
-        em.persist(u);
+        try {
+            u.setPassword(AuthenticationUtils.encodeSHA256(u.getPassword()));
+            em.persist(u);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

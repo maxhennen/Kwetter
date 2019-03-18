@@ -7,14 +7,14 @@ import java.io.Serializable;
 @Table(name = "details")
 public class Details implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
     @Column(name = "bio")
     private String bio;
     @Column(name = "website")
     private String website;
-    @OneToOne(mappedBy = "details")
+    @OneToOne(mappedBy = "details", cascade = CascadeType.PERSIST)
     private Location location;
     @OneToOne
     private User user;

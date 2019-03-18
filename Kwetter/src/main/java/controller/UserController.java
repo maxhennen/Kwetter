@@ -4,12 +4,11 @@ import domain.Details;
 import domain.Location;
 import domain.Role;
 import domain.User;
+import service.RoleService;
 import service.UserService;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
@@ -24,6 +23,9 @@ public class UserController extends Application {
     @Inject
     private UserService userService;
 
+    @Inject
+    private RoleService roleService;
+
     @GET
     @Path("/findAll")
     @Produces(APPLICATION_JSON)
@@ -36,7 +38,7 @@ public class UserController extends Application {
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void save(@FormParam("username") String username, @FormParam("password") String password){
         User user = new User(username, password);
-        Role role = new Role("user");
+        Role role = roleService.getRoleByName("ROLE_USER");
         user.getRoles().add(role);
         userService.createUser(user);
     }
@@ -50,7 +52,7 @@ public class UserController extends Application {
 
     @DELETE
     @Path("/delete")
-    public void delete(@FormParam("username") String username){
+    public void delete(@QueryParam("username") String username){
         User user = userService.findByUsername(username);
         userService.removeUser(user);
     }
@@ -80,6 +82,7 @@ public class UserController extends Application {
 
     @DELETE
     @Path("/unfollow")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void removeFollower(@FormParam("follower") String usernameFollower, @FormParam("following") String usernameFollowing){
         User follower = userService.findByUsername(usernameFollower);
         User following = userService.findByUsername(usernameFollowing);
@@ -88,6 +91,7 @@ public class UserController extends Application {
 
     @POST
     @Path("/addFollow")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void addFollower(@FormParam("follower") String usernameFollower, @FormParam("following") String usernameFollowing){
         User follower = userService.findByUsername(usernameFollower);
         User following = userService.findByUsername(usernameFollowing);
@@ -96,6 +100,7 @@ public class UserController extends Application {
 
     @POST
     @Path("/changeDetails")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void changeDetails(@FormParam("bio") String bio, @FormParam("website") String website, @FormParam("username") String username){
         Details details = new Details(bio, website);
         userService.editDetails(username, details);
@@ -103,6 +108,7 @@ public class UserController extends Application {
 
     @POST
     @Path("/changeLocation")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public void changeLocation(@FormParam("country") String country, @FormParam("city") String city, @FormParam("Street") String street, @FormParam("housenumber") String housenumber, @FormParam("username") String username){
         Location location = new Location(country, city, street, housenumber);
         userService.editLocation(username, location);

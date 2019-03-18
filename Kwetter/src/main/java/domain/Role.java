@@ -8,7 +8,7 @@ import java.util.List;
 @Table(name = "role")
 public class Role implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long Id;
 

@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "kweet")
 public class Kweet implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Id
     private long id;
     @Column(name = "date_time")
