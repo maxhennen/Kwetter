@@ -49,14 +49,14 @@ public class KweetDAOTest implements KweetDAO {
     }
 
     @Override
-    public List<Kweet> getKweetsByUsername(String username) {
-        List<Kweet> kweetsByUsername = new ArrayList<>();
+    public List<Kweet> getKweetsByEmail(String email) {
+        List<Kweet> kweetsByEmail = new ArrayList<>();
 
         for (Kweet k: kweets) {
-            if(k.getUser().getUsername().equals(username)){
-                kweetsByUsername.add(k);
+            if(k.getUser().getEmail().equals(email)){
+                kweetsByEmail.add(k);
             }
         }
-        return kweetsByUsername;
+        return kweetsByEmail;
     }
 }

@@ -41,10 +41,7 @@ public class LikeServiceTest {
         Details details1 = new Details("bio", "website");
         details1.setLocation(location1);
         testUser1.setDetails(details1);
-        testUser1.setUsername("test1");
         testUser1.setId(1);
-        testUser1.setFollowers(new ArrayList<User>());
-        testUser1.setFollowing(new ArrayList<User>());
         testUser1.setKweets(new ArrayList<Kweet>());
 
         testKweet1 = new Kweet();

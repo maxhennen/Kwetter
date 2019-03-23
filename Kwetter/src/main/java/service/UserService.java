@@ -1,9 +1,8 @@
 package service;
 
+import dao.group.GroupDAO;
 import dao.user.UserDAO;
-import domain.Details;
-import domain.Location;
-import domain.User;
+import domain.*;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -15,6 +14,8 @@ public class UserService {
     @Inject
     private UserDAO userDAO;
 
+    @Inject
+    private GroupDAO groupDAO;
 
     /**
      * Used for testing only!
@@ -29,11 +30,15 @@ public class UserService {
      * Creates a new user
      * @param user
      */
-    public void createUser(User user){
+    public void createUser(User user) throws NullPointerException {
 
-        if(userDAO.findUserByUserName(user.getUsername()) == null){
+        System.out.println(userDAO.findUserByEmail(user.getEmail()));
+
+       if(userDAO.findUserByEmail(user.getEmail()) == null){
+            groupDAO.create(new Group(user.getEmail(), "ROLE_USER"));
             userDAO.createUser(user);
-        }
+
+       }
     }
 
     /**
@@ -41,7 +46,7 @@ public class UserService {
      * @param user
      */
     public void editUser(User user){
-        if(userDAO.findUserByID(user.getId()) != null){
+        if(userDAO.findUserByEmail(user.getEmail()) != null){
             userDAO.editUser(user);
         }
     }
@@ -81,21 +86,12 @@ public class UserService {
     }
 
     /**
-     * Retrieves a user by username
-     * @param username
+     * Retrieves a user by email
+     * @param email
      * @return
      */
-    public User findByUsername(String username){
-        return userDAO.findUserByUserName(username);
-    }
-
-    /**
-     * Retrieves a user by id
-     * @param id
-     * @return
-     */
-    public User findByID(long id){
-        return userDAO.findUserByID(id);
+    public User findByEmail(String email){
+        return userDAO.findUserByEmail(email);
     }
 
     /**
@@ -104,9 +100,7 @@ public class UserService {
      * @param following person being followed
      */
     public void followUser(User follower, User following){
-        follower.addFollowing(following);
-        userDAO.editUser(follower);
-        userDAO.editUser(following);
+        userDAO.addFollower(follower.getEmail(), following.getEmail());
     }
 
     /**
@@ -114,10 +108,8 @@ public class UserService {
      * @param follower
      * @param following
      */
-    public void removeFollowing(User follower, User following){
-        follower.removeFollowing(following);
-        userDAO.editUser(follower);
-        userDAO.editUser(following);
+    public void removeFollowing(Follower follower, Following following){
+        userDAO.removeFollower(follower, following);
     }
 
     /**
@@ -125,33 +117,48 @@ public class UserService {
      * @param follower
      * @param following
      */
-    public void removeFollower(User follower, User following){
-        follower.removeFollower(following);
-        userDAO.editUser(follower);
-        userDAO.editUser(following);
+    public void removeFollower(Follower follower, Following following){
+        userDAO.removeFollowing(following, follower);
+    }
+
+    /**
+     * Get follower by email
+     * @param email
+     * @return
+     */
+    public Follower getFollowerByEmail(String email){
+        return userDAO.getFollowerByEmail(email);
+    }
+
+    /**
+     * Get following by email
+     * @param email
+     * @return
+     */
+    public Following getFollowingByEmail(String email){
+        return userDAO.getFollowingByEmail(email);
     }
 
     /**
      * Change the bio
-     * @param username
+     * @param email
      * @param details
      */
-    public void editDetails(String username, Details details){
-        User user = findByUsername(username);
+    public void editDetails(String email, Details details){
+        User user = findByEmail(email);
         user.setDetails(details);
         userDAO.editUser(user);
     }
 
     /**
      * Change location
-     * @param username
+     * @param email
      * @param location
      */
-    public void editLocation(String username, Location location){
-        User user = findByUsername(username);
+    public void editLocation(String email, Location location){
+        User user = findByEmail(email);
         user.getDetails().setLocation(location);
         userDAO.editUser(user);
     }
-
 
 }

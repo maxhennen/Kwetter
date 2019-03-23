@@ -1,5 +1,7 @@
 package dao.user;
 
+import domain.Follower;
+import domain.Following;
 import domain.User;
 
 import java.util.List;
@@ -37,21 +39,14 @@ public interface UserDAO {
 
 
     /**
-     * Return user object with given username
-     * @param userName
+     * Return user object with given email
+     * @param email
      * @return
      */
-    User findUserByUserName(String userName);
+    User findUserByEmail(String email);
 
     /**
-     * Retrieve a user by given id
-     * @param id
-     * @return
-     */
-    User findUserByID(long id);
-
-    /**
-     * Retrieves all the users that the given username follows!
+     * Retrieves all the users that the given email follows!
      * @param u
      * @return
      */
@@ -64,5 +59,40 @@ public interface UserDAO {
      * @return
      */
     List<User> getAllFollowers(User u);
+
+    /**
+     * Add follower
+     * @param emailFollower
+     * @param emailFollowing
+     */
+    void addFollower(String emailFollower, String emailFollowing);
+
+    /**
+     * Remove follower
+     * @param follower
+     * @param following
+     */
+    void removeFollower(Follower follower, Following following);
+
+    /**
+     * Remove following
+     * @param following
+     * @param follower
+     */
+    void removeFollowing(Following following, Follower follower);
+
+    /**
+     * Get a follower by email
+     * @param email
+     * @return
+     */
+    Follower getFollowerByEmail(String email);
+
+    /**
+     * Get a following by email
+     * @param email
+     * @return
+     */
+    Following getFollowingByEmail(String email);
 
 }

@@ -5,7 +5,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "like")
+@Table(name = "kweetLike")
+@NamedQueries({
+        @NamedQuery(name = "Like.findAll", query = "SELECT L FROM Like L"),
+        @NamedQuery(name = "Like.getByID", query = "SELECT L FROM Like L WHERE L.id = :id")
+})
 public class Like implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO)

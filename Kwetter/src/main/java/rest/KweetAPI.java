@@ -1,0 +1,64 @@
+package rest;
+
+import domain.Kweet;
+import service.KweetService;
+import service.UserService;
+
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
+@ApplicationPath("/api")
+@Path("/kweet")
+@Stateless
+public class KweetAPI extends Application {
+
+    @Inject
+    private KweetService kweetService;
+
+    @Inject
+    private UserService userService;
+
+    @GET
+    @Path("/findAll")
+    @Produces(APPLICATION_JSON)
+    public List<Kweet> findAll(){
+        return kweetService.getAllKweets();
+    }
+
+    @POST
+    @Path("/save")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public void save(@FormParam("content") String content, @FormParam("email") String email ){
+        Kweet kweet = new Kweet(LocalDateTime.now(), content, userService.findByEmail(email));
+        kweetService.createKweet(kweet);
+    }
+
+    @GET
+    @Path("/findById/{id}")
+    @Produces(APPLICATION_JSON)
+    public Kweet findOneById(@PathParam("id") long id){
+        return kweetService.getKweetById(id);
+    }
+
+    @DELETE
+    @Path("/delete/{id}")
+    public void delete(@PathParam("id") long id){
+        Kweet kweet = kweetService.getKweetById(id);
+        kweetService.removeKweet(kweet);
+    }
+
+    @GET
+    @Path("/findByEmail/{email}")
+    @Produces(APPLICATION_JSON)
+    public List<Kweet> findByEmail(@PathParam("email") String email){
+        return kweetService.getKweetsByEmail(email);
+    }
+
+}

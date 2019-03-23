@@ -29,18 +29,12 @@ public class LikeDAOImpl implements LikeDAO {
 
     @Override
     public List<Like> findAll() {
-        return (List<Like>) em.createQuery("SELECT L FROM Like L").getResultList();
+        return em.createNamedQuery("Like.findAll").getResultList();
     }
 
     @Override
     public Like get(long id) {
-        Query q = em.createQuery("SELECT L FROM Like L WHERE L.id = :id");
-        q.setParameter("id", id);
-        try {
-            return (Like)q.getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return (Like) em.createNamedQuery("Like.getByID")
+                .setParameter("id", id).getSingleResult();
     }
 }

@@ -1,5 +1,7 @@
 package dao.user;
 
+import domain.Follower;
+import domain.Following;
 import domain.User;
 import utils.AuthenticationUtils;
 
@@ -26,9 +28,7 @@ public class UserDAOImpl implements UserDAO{
         try {
             u.setPassword(AuthenticationUtils.encodeSHA256(u.getPassword()));
             em.persist(u);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
     }
@@ -45,28 +45,15 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public List<User> getAllUsers() {
-        return (List<User>) em.createQuery("SELECT U FROM User U").getResultList();
+        return  em.createNamedQuery("User.findAll").getResultList();
     }
 
     @Override
-    public User findUserByUserName(String username) {
-        Query q = em.createQuery("SELECT U FROM User u WHERE U.username = :username");
-        q.setParameter("username", username);
+    public User findUserByEmail(String email) {
         try {
-            return (User) q.getSingleResult();
-        } catch (NoResultException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    @Override
-    public User findUserByID(long id) {
-        Query q = em.createQuery("SELECT U FROM User u WHERE U.id = :id");
-        q.setParameter("id", id);
-        try {
-            return (User) q.getSingleResult();
-        } catch (NoResultException e) {
+            return (User)em.createNamedQuery("User.findByEmail")
+                    .setParameter("email", email).getSingleResult();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -74,13 +61,47 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public List<User> getAllFollowing(User u) {
-        User found = findUserByUserName(u.getUsername());
-        return found.getFollowing();
+        return (List<User>) em.createNamedQuery("User.getFollowing")
+                .setParameter("email", u.getEmail()).getResultList();
     }
 
     @Override
     public List<User> getAllFollowers(User u) {
-        User found = findUserByUserName(u.getUsername());
-        return found.getFollowers();
+        return (List<User>) em.createNamedQuery("User.getFollowers")
+                .setParameter("email", u.getEmail()).getResultList();
     }
+
+    @Override
+    public void addFollower(String emailFollower, String emailFollowing) {
+        Follower follower = new Follower(emailFollowing, emailFollower);
+        Following following = new Following(emailFollower, emailFollowing);
+
+        em.persist(follower);
+        em.persist(following);
+    }
+
+    @Override
+    public void removeFollower(Follower follower, Following following) {
+        em.remove(follower);
+        em.remove(following);
+    }
+
+    @Override
+    public void removeFollowing(Following following, Follower follower) {
+        em.remove(follower);
+        em.remove(following);
+    }
+
+    @Override
+    public Follower getFollowerByEmail(String email) {
+        return (Follower)em.createNamedQuery("User.getFollowerByEmail")
+                .setParameter("email", email);
+    }
+
+    @Override
+    public Following getFollowingByEmail(String email) {
+        return (Following) em.createNamedQuery("User.getFollowingByEmail")
+                .setParameter("email", email);
+    }
+
 }

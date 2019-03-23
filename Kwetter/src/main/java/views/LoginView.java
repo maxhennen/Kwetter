@@ -2,6 +2,7 @@ package views;
 
 import domain.User;
 import service.UserService;
+import utils.AuthenticationUtils;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -38,16 +39,23 @@ public class LoginView implements Serializable {
             return "signin";
         }
         Principal principal = request.getUserPrincipal();
-        this.user = userEJB.findByUsername(principal.getName());
+        this.user = userEJB.findByEmail(principal.getName());
         log.info("Authentication done for user: " + principal.getName());
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
         Map<String, Object> sessionMap = externalContext.getSessionMap();
         sessionMap.put("User", user);
-        if (request.isUserInRole("users")) {
-            return "/user/privatepage?faces-redirect=true";
+        String s = "";
+
+        if (request.isUserInRole("ROLE_USER")) {
+            s =  "user";
+        } else if(request.isUserInRole("ROLE_ADMIN")) {
+            s = "admin";
+        } else if (request.isUserInRole("ROLE_MOD")) {
+            s = "mod";
         } else {
-            return "signin";
+            s = "signin";
         }
+        return s;
     }
     public String logout() {
         FacesContext context = FacesContext.getCurrentInstance();

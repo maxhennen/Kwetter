@@ -5,10 +5,10 @@
 
         <class>domain.Kweet</class>
         <class>domain.User</class>
+        <class>domain.Group</class>
         <class>domain.Like</class>
         <class>domain.Details</class>
         <class>domain.Location</class>
-        <class>domain.Role</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

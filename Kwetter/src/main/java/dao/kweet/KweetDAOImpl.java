@@ -35,31 +35,41 @@ public class KweetDAOImpl implements KweetDAO {
 
     @Override
     public void removeKweet(Kweet k) {
+        if(!em.contains(k)){
+            k = em.merge(k);
+        }
         em.remove(k);
     }
 
     @Override
     public List<Kweet> findAll() {
-        return (List<Kweet>)em.createQuery("SELECT K from Kweet K").getResultList();
-    }
-
-    @Override
-    public Kweet get(long id) {
-        Query q = em.createQuery("SELECT K FROM Kweet K where k.id = :id");
-        q.setParameter("id", id);
         try {
-            return (Kweet) q.getSingleResult();
-        } catch (NoResultException e) {
+            return em.createNamedQuery("Kweet.findAll").getResultList();
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
     @Override
-    public List<Kweet> getKweetsByUsername(String username) {
-        Query q = em.createQuery("SELECT K FROM Kweet K INNER JOIN User u ON K.user.id = U.id where U.username = :username");
-        q.setParameter("username", username);
-        return (List<Kweet>) q.getResultList();
+    public Kweet get(long id) {
+        try {
+            return (Kweet) em.createNamedQuery("Kweet.getByID").getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public List<Kweet> getKweetsByEmail(String email) {
+        try {
+            return em.createNamedQuery("Kweet.getKweetsByEmail")
+                    .setParameter("email", email).getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

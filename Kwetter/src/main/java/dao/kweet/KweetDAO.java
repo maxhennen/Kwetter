@@ -41,10 +41,10 @@ public interface KweetDAO {
     Kweet get(long id);
 
     /**
-     * Retrieves kweets by username
-     * @param username
+     * Retrieves kweets by email
+     * @param email
      * @return
      */
-    List<Kweet> getKweetsByUsername(String username);
+    List<Kweet> getKweetsByEmail(String email);
 
 }

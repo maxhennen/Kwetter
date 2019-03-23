@@ -37,10 +37,7 @@ public class UserServiceTest {
         Details details1 = new Details("bio", "website");
         details1.setLocation(location1);
         testUser1.setDetails(details1);
-        testUser1.setUsername("test1");
         testUser1.setId(1);
-        testUser1.setFollowers(new ArrayList<User>());
-        testUser1.setFollowing(new ArrayList<User>());
         testUser1.setKweets(new ArrayList<Kweet>());
 
         testUser2 = new User();
@@ -48,10 +45,7 @@ public class UserServiceTest {
         Details details2 = new Details("bio1", "website2");
         details1.setLocation(location2);
         testUser2.setDetails(details2);
-        testUser2.setUsername("test12");
         testUser2.setId(1);
-        testUser2.setFollowers(new ArrayList<User>());
-        testUser2.setFollowing(new ArrayList<User>());
         testUser2.setKweets(new ArrayList<Kweet>());
     }
 
@@ -64,7 +58,7 @@ public class UserServiceTest {
 
     @Test
     public void editUser() {
-        testUser1.setUsername("max");
+        testUser1.setName("max");
         userService.editUser(testUser1);
         verify(userDAOTest).editUser(testUser1);
     }
@@ -94,16 +88,11 @@ public class UserServiceTest {
     }
 
     @Test
-    public void findByUsername() {
-        userService.findByUsername(testUser1.getUsername());
-        verify(userDAOTest).findUserByUserName(testUser1.getUsername());
+    public void findByEmail() {
+        userService.findByEmail(testUser1.getEmail());
+        verify(userDAOTest).findUserByEmail(testUser1.getEmail());
     }
 
-    @Test
-    public void findByID() {
-        userService.findByID(1);
-        verify(userDAOTest).findUserByID(1);
-    }
 
     @Test
     public void followUser() {
@@ -112,23 +101,23 @@ public class UserServiceTest {
 
     @Test
     public void removeFollowing() {
-        userService.removeFollowing(testUser1, testUser2);
+
     }
 
     @Test
     public void removeFollower() {
-        userService.removeFollower(testUser2, testUser1);
+
     }
 
     @Test
     public void editDetails() {
         testUser1.getDetails().setBio("hallo");
-        userService.editDetails(testUser1.getUsername(), testUser1.getDetails());
+        userService.editDetails(testUser1.getEmail(), testUser1.getDetails());
     }
 
     @Test
     public void editLocation() {
         testUser1.getDetails().getLocation().setCity("Hoi");
-        userService.editLocation(testUser1.getUsername(), testUser1.getDetails().getLocation());
+        userService.editLocation(testUser1.getEmail(), testUser1.getDetails().getLocation());
     }
 }

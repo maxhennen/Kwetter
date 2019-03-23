@@ -84,11 +84,11 @@ public class KweetService {
     }
 
     /**
-     * Retrieves all kweets from an username
-     * @param username
+     * Retrieves all kweets from an email
+     * @param email
      * @return
      */
-    public List<Kweet> getKweetsByUsername(String username){
-        return kweetDAO.getKweetsByUsername(username);
+    public List<Kweet> getKweetsByEmail(String email){
+        return kweetDAO.getKweetsByEmail(email);
     }
 }

@@ -18,6 +18,8 @@
             <h:outputLabel for="email">E-Mail:</h:outputLabel>
             <h:inputText id="email" value="#{registerView.email}" required="true"
                          requiredMessage="Please enter your e-mail address">
+                        <f:validator validatorId="emailValidator" />
+
             </h:inputText>
             <h:outputLabel for="password">Password:</h:outputLabel>
             <h:inputSecret id="password" value="#{registerView.password}"

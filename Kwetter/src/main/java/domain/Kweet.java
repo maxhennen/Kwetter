@@ -8,6 +8,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "kweet")
+@NamedQueries({
+        @NamedQuery(name = "Kweet.findAll", query = "SELECT K from Kweet K"),
+        @NamedQuery(name = "Kweet.getByID", query = "SELECT K FROM Kweet K where k.id = :id"),
+        @NamedQuery(name = "Kweet.getKweetsByEmail", query = "SELECT K FROM Kweet K INNER JOIN User u ON K.user.id = U.id where U.email = :email")
+})
 public class Kweet implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.AUTO)

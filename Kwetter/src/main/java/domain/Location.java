@@ -67,6 +67,14 @@ public class Location implements Serializable {
         this.house_number = house_number;
     }
 
+    public Details getDetails() {
+        return details;
+    }
+
+    public void setDetails(Details details) {
+        this.details = details;
+    }
+
     @Override
     public String toString() {
         return "Location{" +

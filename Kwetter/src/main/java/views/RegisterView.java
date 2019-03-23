@@ -46,7 +46,7 @@ public class RegisterView implements Serializable {
             facesContext.addMessage(passwordId, msg);
             facesContext.renderResponse();
         }
-        if (userEJB.findByUsername(email) != null) {
+        if (userEJB.findByEmail(email) != null) {
             FacesMessage msg = new FacesMessage("User with this e-mail already exists");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             facesContext.addMessage(passwordId, msg);
@@ -54,7 +54,7 @@ public class RegisterView implements Serializable {
         }
     }
     public String register() {
-        User user = new User(email, password);
+        User user = new User(email, password, name);
         userEJB.createUser(user);
         log.info("New user created with e-mail: " + email + " and name: " + name);
         return "regdone";

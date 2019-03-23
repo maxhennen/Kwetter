@@ -1,6 +1,9 @@
 package dao.user;
 
+import domain.Follower;
+import domain.Following;
 import domain.User;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
@@ -37,19 +40,9 @@ public class UserDAOTest implements UserDAO {
     }
 
     @Override
-    public User findUserByUserName(String userName) {
+    public User findUserByEmail(String email) {
         for(User u : users){
-            if(u.getUsername().equals(userName)){
-                return u;
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public User findUserByID(long id) {
-        for(User u : users){
-            if(u.getId() == id){
+            if(u.getEmail().equals(email)){
                 return u;
             }
         }
@@ -58,11 +51,37 @@ public class UserDAOTest implements UserDAO {
 
     @Override
     public List<User> getAllFollowing(User u) {
-        return u.getFollowing();
+        throw  new NotImplementedException();
     }
 
     @Override
     public List<User> getAllFollowers(User u) {
-        return u.getFollowers();
+        throw  new NotImplementedException();
     }
+
+    @Override
+    public void addFollower(String emailFollower, String emailFollowing) {
+
+    }
+
+    @Override
+    public void removeFollower(Follower follower, Following following) {
+
+    }
+
+    @Override
+    public void removeFollowing(Following following, Follower follower) {
+
+    }
+
+    @Override
+    public Follower getFollowerByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public Following getFollowingByEmail(String email) {
+        return null;
+    }
+
 }

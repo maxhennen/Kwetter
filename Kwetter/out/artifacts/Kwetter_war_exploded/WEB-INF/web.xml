@@ -46,8 +46,13 @@
     </login-config>
 
     <security-role>
-        <description/>
-        <role-name>users</role-name>
+        <role-name>ROLE_ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <role-name>ROLE_USER</role-name>
+    </security-role>
+    <security-role>
+        <role-name>ROLE_MOD</role-name>
     </security-role>
 
     <security-constraint>
@@ -57,7 +62,35 @@
             <url-pattern>/user/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>users</role-name>
+            <role-name>ROLE_USER</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <display-name>Restricted to admins</display-name>
+        <web-resource-collection>
+            <web-resource-name>Restricted Access</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ROLE_ADMIN</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <display-name>Restricted to moderators</display-name>
+        <web-resource-collection>
+            <web-resource-name>Restricted Access</web-resource-name>
+            <url-pattern>/mod/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ROLE_MOD</role-name>
         </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>NONE</transport-guarantee>

@@ -24,10 +24,7 @@ public class UserTest {
         Details details1 = new Details("bio", "website");
         details1.setLocation(location1);
         testUser1.setDetails(details1);
-        testUser1.setUsername("test1");
         testUser1.setId(1);
-        testUser1.setFollowers(new ArrayList<User>());
-        testUser1.setFollowing(new ArrayList<User>());
         testUser1.setKweets(new ArrayList<Kweet>());
 
         testUser2 = new User();
@@ -35,10 +32,7 @@ public class UserTest {
         Details details2 = new Details("bio1", "website2");
         details1.setLocation(location2);
         testUser2.setDetails(details2);
-        testUser2.setUsername("test12");
         testUser2.setId(1);
-        testUser2.setFollowers(new ArrayList<User>());
-        testUser2.setFollowing(new ArrayList<User>());
         testUser2.setKweets(new ArrayList<Kweet>());
 
         testKweet1 = new Kweet();
@@ -51,27 +45,17 @@ public class UserTest {
 
     @Test
     public void addFollowing() {
-        testUser1.addFollowing(testUser2);
 
-        assertTrue(testUser2.getFollowers().contains(testUser1));
-        assertTrue(testUser1.getFollowing().contains(testUser2));
     }
 
     @Test
     public void removeFollowing() {
-        testUser1.removeFollowing(testUser2);
-        assertFalse(testUser2.getFollowers().contains(testUser1));
-        assertFalse(testUser1.getFollowing().contains(testUser2));
+
     }
 
     @Test
     public void removeFollower() {
-        testUser1.addFollowing(testUser2);
 
-        testUser2.removeFollower(testUser1);
-
-        assertFalse(testUser2.getFollowers().contains(testUser1));
-        assertFalse(testUser1.getFollowing().contains(testUser2));
     }
 
     @Test
