@@ -12,20 +12,18 @@ import java.time.LocalDateTime;
 })
 public class Like implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
     @Column(name = "date_time")
     private LocalDateTime dateTime;
     @ManyToOne
     private User user;
-    @ManyToOne
-    private Kweet kweet;
-
-    public Like(LocalDateTime dateTime, User user, Kweet kweet) {
+    private long kweetId;
+    public Like(LocalDateTime dateTime, User user, long kweetId) {
         this.dateTime = dateTime;
         this.user = user;
-        this.kweet = kweet;
+        this.kweetId = kweetId;
     }
 
     public Like() {
@@ -43,10 +41,6 @@ public class Like implements Serializable {
         return user;
     }
 
-    public Kweet getKweet() {
-        return kweet;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -59,17 +53,12 @@ public class Like implements Serializable {
         this.user = user;
     }
 
-    public void setKweet(Kweet kweet) {
-        this.kweet = kweet;
-    }
-
     @Override
     public String toString() {
         return "Like{" +
                 "id=" + id +
                 ", dateTime=" + dateTime +
                 ", user=" + user +
-                ", kweet=" + kweet +
                 '}';
     }
 }

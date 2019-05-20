@@ -19,8 +19,9 @@ public class GroupDAOImpl implements GroupDAO {
     private EntityManager em;
 
     @Override
-    public void create(Group g) {
+    public Group create(Group g) {
         em.persist(g);
+        return g;
     }
 
     @Override
@@ -37,8 +38,9 @@ public class GroupDAOImpl implements GroupDAO {
     }
 
     @Override
-    public void update(Group g) {
+    public Group update(Group g) {
         em.merge(g);
+        return g;
     }
 
     @Override

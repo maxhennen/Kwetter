@@ -11,26 +11,27 @@ import java.util.List;
 @NamedQueries({
         @NamedQuery(name = "Kweet.findAll", query = "SELECT K from Kweet K"),
         @NamedQuery(name = "Kweet.getByID", query = "SELECT K FROM Kweet K where k.id = :id"),
-        @NamedQuery(name = "Kweet.getKweetsByEmail", query = "SELECT K FROM Kweet K INNER JOIN User u ON K.user.id = U.id where U.email = :email")
+        @NamedQuery(name = "Kweet.getKweetsByEmail", query = "SELECT K FROM Kweet K where K.emailUser = :email"),
+//        @NamedQuery(name = "Kweet.getKweetsFromFollowing", query = "SELECT K FROM Kweet K inner join Following f on f.emailFollowing = k.emailUser " +
+//                "inner join User u on f.emailUser = u.email where u.email = :email")
 })
 public class Kweet implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
     @Column(name = "date_time")
     private LocalDateTime DateTime;
     @Column(name = "content")
     private String content;
-    @OneToMany(mappedBy = "kweet")
     private List<Like> likes;
-    @ManyToOne
-    private User user;
+    @Column(name = "emailUser")
+    private String emailUser;
 
-    public Kweet(LocalDateTime dateTime, String content, User user) {
+    public Kweet(LocalDateTime dateTime, String content, String emailUser) {
         DateTime = dateTime;
         this.content = content;
-        this.user = user;
+        this.emailUser = emailUser;
         likes = new ArrayList<>();
     }
 
@@ -53,8 +54,8 @@ public class Kweet implements Serializable {
         return likes;
     }
 
-    public User getUser() {
-        return user;
+    public String getUser() {
+        return emailUser;
     }
 
     public void setId(long id) {
@@ -73,8 +74,8 @@ public class Kweet implements Serializable {
         this.likes = likes;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(String user) {
+        this.emailUser = user;
     }
 
     @Override

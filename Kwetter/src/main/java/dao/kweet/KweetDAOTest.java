@@ -12,12 +12,13 @@ public class KweetDAOTest implements KweetDAO {
     List<Kweet> kweets = new ArrayList<>();
 
     @Override
-    public void create(Kweet k) {
+    public Kweet create(Kweet k) {
         kweets.add(k);
+        return k;
     }
 
     @Override
-    public void edit(Kweet k) {
+    public Kweet edit(Kweet k) {
 
         for (Kweet kw: kweets) {
             if(kw.getId() == k.getId()){
@@ -26,11 +27,13 @@ public class KweetDAOTest implements KweetDAO {
                 break;
             }
         }
+        return k;
     }
 
     @Override
-    public void removeKweet(Kweet k) {
+    public boolean removeKweet(Kweet k) {
         kweets.remove(k);
+        return true;
     }
 
     @Override
@@ -53,7 +56,7 @@ public class KweetDAOTest implements KweetDAO {
         List<Kweet> kweetsByEmail = new ArrayList<>();
 
         for (Kweet k: kweets) {
-            if(k.getUser().getEmail().equals(email)){
+            if(k.getUser().equals(email)){
                 kweetsByEmail.add(k);
             }
         }

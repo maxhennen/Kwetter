@@ -1,6 +1,9 @@
 package rest;
 
+import authentication.Secured;
 import domain.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import service.KweetService;
 import service.UserService;
 
 import javax.ejb.Stateless;
@@ -8,100 +11,149 @@ import javax.inject.Inject;
 import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 
 @Path("/user")
 @Stateless
+@Produces(APPLICATION_JSON)
+@Secured
 public class UserAPI extends Application {
 
     @Inject
     private UserService userService;
+    @Inject
+    private KweetService kweetService;
 
     @GET
     @Path("/findAll")
-    @Produces(APPLICATION_JSON)
-    public List<User> findAll(){
-        return userService.getAllUsers();
-    }
-
-    @POST
-    @Path("/createUser")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void save(@FormParam("email") String email, @FormParam("password") String password, @FormParam("name") String name){
-        User user = new User(name, email, password);
-        userService.createUser(user);
+    public Response findAll(){
+        List<User> users = userService.getAllUsers();
+        if(users != null){
+            return Response.ok(users).build();
+        } else {
+            return Response.noContent().build();
+        }
     }
 
     @DELETE
     @Path("/delete")
-    public void delete(@QueryParam("email") String email){
+    public Response delete(@QueryParam("email") String email){
         User user = userService.findByEmail(email);
-        userService.removeUser(user);
+        if(userService.removeUser(user)){
+            return Response.ok().entity("User is removed").build();
+        } else {
+            return Response.status(409).build();
+        }
     }
 
-    @GET
+    @POST
     @Path("/findByEmail")
-    @Produces(APPLICATION_JSON)
-    public User findByEmail(@QueryParam("email") String email){
-        return userService.findByEmail(email);
+    public Response findByEmail(@FormParam("email") String email){
+        User user = userService.findByEmail(email);
+        if(user != null){
+            user.setKweets(kweetService.getKweetsByEmail(email));
+            user.setFollowers(userService.getFollowers(user));
+            user.setFollowings(userService.getFollowing(user));
+            return Response.ok(user).build();
+        } else {
+            return Response.noContent().build();
+        }
     }
 
-    @GET
+    @POST
     @Path("/following")
-    @Produces(APPLICATION_JSON)
-    public List<User> getFollowing(@QueryParam("email") String email){
+    public Response getFollowing(@QueryParam("email") String email){
         User user = userService.findByEmail(email);
-        return userService.getFollowing(user);
+        List<User> followings = userService.getFollowing(user);
+        if(followings != null && !followings.isEmpty()){
+            return Response.ok().entity(followings).build();
+        } else {
+            return Response.noContent().build();
+        }
     }
 
     @GET
     @Path("/followers")
-    @Produces(APPLICATION_JSON)
-    public List<User> getFollowers(@QueryParam("email") String email){
+    public Response getFollowers(@QueryParam("email") String email){
         User user = userService.findByEmail(email);
-        return userService.getFollowing(user);
+        List<User> followers =  userService.getFollowers(user);
+        if(followers != null && !followers.isEmpty()){
+            return Response.ok().entity(followers).build();
+        } else {
+            return Response.noContent().build();
+        }
     }
 
     @DELETE
     @Path("/unfollow")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void removeFollowing(@FormParam("follower") String emailFollower, @FormParam("following") String emailFollowing){
-        userService.removeFollowing(userService.getFollowerByEmail(emailFollower), userService.getFollowingByEmail(emailFollowing));
+    public Response removeFollowing(@FormParam("follower") String emailFollower, @FormParam("following") String emailFollowing){
+        if(userService.removeFollowing(userService.getFollowerByEmail(emailFollower), userService.getFollowingByEmail(emailFollowing))){
+            return Response.ok().entity("Following is removed").build();
+        } else {
+            return Response.noContent().build();
+        }
     }
 
     @DELETE
     @Path("/removeFollower")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void removeFollower(@FormParam("follower") String emailFollower, @FormParam("following") String emailFollowing){
-        userService.removeFollower(userService.getFollowerByEmail(emailFollower), userService.getFollowingByEmail(emailFollowing));
+    public Response removeFollower(@FormParam("follower") String emailFollower, @FormParam("following") String emailFollowing){
+        if(userService.removeFollower(userService.getFollowerByEmail(emailFollower), userService.getFollowingByEmail(emailFollowing))){
+            return Response.ok().entity("Follower is removed").build();
+        } else {
+            return Response.noContent().build();
+        }
     }
 
     @POST
     @Path("/addFollow")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void addFollower(@FormParam("follower") String emailFollower, @FormParam("following") String emailFollowing){
+    public Response addFollower(@FormParam("follower") String emailFollower, @FormParam("following") String emailFollowing){
         User follower = userService.findByEmail(emailFollower);
         User following = userService.findByEmail(emailFollowing);
-        userService.followUser(follower, following);
+        if(userService.followUser(follower, following) != null){
+            return Response.ok().entity(follower + " is now following " + following).build();
+        } else {
+            return Response.status(409).build();
+        }
     }
 
     @POST
     @Path("/changeDetails")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void changeDetails(@FormParam("bio") String bio, @FormParam("website") String website, @FormParam("email") String email){
+    public Response changeDetails(@FormParam("bio") String bio, @FormParam("website") String website, @FormParam("email") String email){
         Details details = new Details(bio, website);
-        userService.editDetails(email, details);
+        if(userService.editDetails(email, details) != null){
+            return Response.ok().entity(details).build();
+        } else {
+            return Response.status(409).build();
+        }
     }
 
     @POST
     @Path("/changeLocation")
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public void changeLocation(@FormParam("country") String country, @FormParam("city") String city, @FormParam("Street") String street, @FormParam("housenumber") String housenumber, @FormParam("email") String email){
+    public Response changeLocation(@FormParam("country") String country, @FormParam("city") String city, @FormParam("Street") String street, @FormParam("housenumber") String housenumber, @FormParam("email") String email){
         Location location = new Location(country, city, street, housenumber);
-        userService.editLocation(email, location);
+        if(userService.editLocation(email, location) != null){
+            return Response.ok().entity(location).build();
+        } else {
+            return Response.status(409).build();
+        }
+    }
+
+    @POST
+    @Consumes({APPLICATION_JSON, APPLICATION_FORM_URLENCODED})
+    @Path("/editUser")
+    public Response editUser(User user){
+        if(userService.editUser(user) != null){
+            return Response.ok(user).build();
+        } else {
+            return Response.status(409).build();
+        }
     }
 
 }

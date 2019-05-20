@@ -13,11 +13,15 @@ public class AuthenticationUtils {
      * @throws UnsupportedEncodingException if UTF-8 is not supported by the system
      * @throws NoSuchAlgorithmException if SHA-256 is not supported by the system
      */
-    public static String encodeSHA256(String password)
-            throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        md.update(password.getBytes("UTF-8"));
-        byte[] digest = md.digest();
-        return DatatypeConverter.printBase64Binary(digest).toString();
+    public static String encodeSHA256(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            md.update(password.getBytes("UTF-8"));
+            byte[] digest = md.digest();
+            return DatatypeConverter.printBase64Binary(digest).toString();
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

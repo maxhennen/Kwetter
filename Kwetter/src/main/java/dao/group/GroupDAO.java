@@ -9,7 +9,7 @@ public interface GroupDAO {
     /**
      * Creates a new Like object
      */
-    void create(Group r);
+    Group create(Group r);
 
     /**
      * Retrieves a group by name
@@ -20,7 +20,7 @@ public interface GroupDAO {
      * Edit group
      * @param g
      */
-    void update(Group g);
+    Group update(Group g);
 
     /**
      * Returns list of all groups

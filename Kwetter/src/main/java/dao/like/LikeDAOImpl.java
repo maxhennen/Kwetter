@@ -18,13 +18,15 @@ public class LikeDAOImpl implements LikeDAO {
     private EntityManager em;
 
     @Override
-    public void create(Like l) {
+    public Like create(Like l) {
         em.persist(l);
+        return l;
     }
 
     @Override
-    public void removeLike(Like l) {
+    public Like removeLike(Like l) {
         em.remove(l);
+        return l;
     }
 
     @Override

@@ -30,16 +30,16 @@ public class LikeService {
      * Create a like
      * @param like
      */
-    public void createLike(Like like){
-        likeDAO.create(like);
+    public Like createLike(Like like){
+        return likeDAO.create(like);
     }
 
     /**
      * Removes a like
      * @param like
      */
-    public void removeLike(Like like){
-        likeDAO.removeLike(like);
+    public Like removeLike(Like like){
+        return likeDAO.removeLike(like);
     }
 
     /**

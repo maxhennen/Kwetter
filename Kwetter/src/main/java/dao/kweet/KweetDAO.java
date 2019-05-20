@@ -10,14 +10,14 @@ public interface KweetDAO {
     /**
      * Creates a new Kweet object
      */
-    void create(Kweet k);
+    Kweet create(Kweet k);
 
 
     /**
      * Edits a Kweet
      * @param k
      */
-    void edit( Kweet k);
+    Kweet edit( Kweet k);
 
 
     /**
@@ -25,7 +25,7 @@ public interface KweetDAO {
      *
      * @param k
      */
-    void removeKweet(Kweet k);
+    boolean removeKweet(Kweet k);
 
 
     /**

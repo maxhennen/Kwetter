@@ -30,25 +30,26 @@ public class UserService {
      * Creates a new user
      * @param user
      */
-    public void createUser(User user) throws NullPointerException {
+    public User createUser(User user) throws NullPointerException {
 
         System.out.println(userDAO.findUserByEmail(user.getEmail()));
 
        if(userDAO.findUserByEmail(user.getEmail()) == null){
             groupDAO.create(new Group(user.getEmail(), "ROLE_USER"));
-            userDAO.createUser(user);
-
+            return userDAO.createUser(user);
        }
+       return null;
     }
 
     /**
      * Updates an user
      * @param user
      */
-    public void editUser(User user){
+    public User editUser(User user){
         if(userDAO.findUserByEmail(user.getEmail()) != null){
-            userDAO.editUser(user);
+            return userDAO.editUser(user);
         }
+        return null;
     }
 
     /**
@@ -73,8 +74,8 @@ public class UserService {
      * Removes the given user
      * @param user
      */
-    public void removeUser(User user){
-        userDAO.removeUser(user);
+    public boolean removeUser(User user){
+        return userDAO.removeUser(user);
     }
 
     /**
@@ -99,8 +100,8 @@ public class UserService {
      * @param follower person following someone
      * @param following person being followed
      */
-    public void followUser(User follower, User following){
-        userDAO.addFollower(follower.getEmail(), following.getEmail());
+    public Follower followUser(User follower, User following){
+        return userDAO.addFollower(follower.getEmail(), following.getEmail());
     }
 
     /**
@@ -108,8 +109,8 @@ public class UserService {
      * @param follower
      * @param following
      */
-    public void removeFollowing(Follower follower, Following following){
-        userDAO.removeFollower(follower, following);
+    public boolean removeFollowing(Follower follower, Following following){
+       return userDAO.removeFollower(follower, following);
     }
 
     /**
@@ -117,8 +118,8 @@ public class UserService {
      * @param follower
      * @param following
      */
-    public void removeFollower(Follower follower, Following following){
-        userDAO.removeFollowing(following, follower);
+    public boolean removeFollower(Follower follower, Following following){
+        return userDAO.removeFollowing(following, follower);
     }
 
     /**
@@ -144,10 +145,10 @@ public class UserService {
      * @param email
      * @param details
      */
-    public void editDetails(String email, Details details){
+    public User editDetails(String email, Details details){
         User user = findByEmail(email);
         user.setDetails(details);
-        userDAO.editUser(user);
+        return userDAO.editUser(user);
     }
 
     /**
@@ -155,10 +156,17 @@ public class UserService {
      * @param email
      * @param location
      */
-    public void editLocation(String email, Location location){
+    public User editLocation(String email, Location location){
         User user = findByEmail(email);
         user.getDetails().setLocation(location);
-        userDAO.editUser(user);
+        return userDAO.editUser(user);
     }
 
+    public User login(String email, String password){
+        return userDAO.login(email, password);
+    }
+
+    public Token addToken(Token token){
+        return userDAO.addToken(token);
+    }
 }

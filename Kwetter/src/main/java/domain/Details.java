@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Table(name = "details")
 public class Details implements Serializable {
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
     @Column(name = "bio")
@@ -19,7 +19,7 @@ public class Details implements Serializable {
     @OneToOne
     private User user;
 
-    public Details(String bio, String website, Location location, User user) {
+    public Details(String bio, String website, Location location) {
         this.bio = bio;
         this.website = website;
         this.location = location;

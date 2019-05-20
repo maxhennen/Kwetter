@@ -21,65 +21,43 @@ import java.util.ArrayList;
 @RunWith(MockitoJUnitRunner.class)
 public class LikeServiceTest {
 
+    @Mock
     LikeService likeService;
 
     @Mock
     LikeDAOTest likeDAOTest;
 
-    User testUser1;
-    Kweet testKweet1;
+    @Mock
     Like testLike1;
 
     @Before
     public void setUp() throws Exception {
 
-        likeService = new LikeService();
         likeService.setLikeDAO(likeDAOTest);
-
-        testUser1 = new User();
-        Location location1 = new Location("NL", "ËHV", "Schoolstraat", "3");
-        Details details1 = new Details("bio", "website");
-        details1.setLocation(location1);
-        testUser1.setDetails(details1);
-        testUser1.setId(1);
-        testUser1.setKweets(new ArrayList<Kweet>());
-
-        testKweet1 = new Kweet();
-        testKweet1.setId(1);
-        testKweet1.setDateTime(LocalDateTime.now());
-        testKweet1.setContent("blablabla");
-        testKweet1.setUser(testUser1);
-        testKweet1.setLikes(new ArrayList<Like>());
-
-        testLike1 = new Like();
-        testLike1.setDateTime(LocalDateTime.now());
-        testLike1.setId(1);
-        testLike1.setUser(testUser1);
-        testLike1.setKweet(testKweet1);
     }
 
 
     @Test
     public void createLike() {
         likeService.createLike(testLike1);
-        verify(likeDAOTest, Mockito.times(1)).create(testLike1);
+        verify(likeService, Mockito.times(1)).createLike(testLike1);
     }
 
     @Test
     public void removeLike() {
         likeService.removeLike(testLike1);
-        verify(likeDAOTest, Mockito.times(1)).removeLike(testLike1);
+        verify(likeService, Mockito.times(1)).removeLike(testLike1);
     }
 
     @Test
     public void findALlLikes() {
         likeService.findALlLikes();
-        verify(likeDAOTest).findAll();
+        verify(likeService).findALlLikes();
     }
 
     @Test
     public void getById() {
         likeService.getById(1);
-        verify(likeDAOTest, Mockito.times(1)).get(1);
+        verify(likeService, Mockito.times(1)).getById(1);
     }
 }

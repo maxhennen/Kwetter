@@ -12,13 +12,15 @@ public class LikeDAOTest implements LikeDAO{
     List<Like> likes = new ArrayList<>();
 
     @Override
-    public void create(Like l) {
+    public Like create(Like l) {
         likes.add(l);
+        return l;
     }
 
     @Override
-    public void removeLike(Like l) {
+    public Like removeLike(Like l) {
         likes.remove(l);
+        return l;
     }
 
     @Override

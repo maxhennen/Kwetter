@@ -24,21 +24,24 @@ public class KweetDAOImpl implements KweetDAO {
     private EntityManager em;
 
     @Override
-    public void create(Kweet k) {
+    public Kweet create(Kweet k) {
         em.persist(k);
+        return k;
     }
 
     @Override
-    public void edit(Kweet k) {
+    public Kweet edit(Kweet k) {
         em.merge(k);
+        return k;
     }
 
     @Override
-    public void removeKweet(Kweet k) {
+    public boolean removeKweet(Kweet k) {
         if(!em.contains(k)){
             k = em.merge(k);
         }
         em.remove(k);
+        return true;
     }
 
     @Override

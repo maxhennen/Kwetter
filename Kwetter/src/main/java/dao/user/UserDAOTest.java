@@ -2,6 +2,7 @@ package dao.user;
 
 import domain.Follower;
 import domain.Following;
+import domain.Token;
 import domain.User;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
@@ -15,23 +16,26 @@ public class UserDAOTest implements UserDAO {
     List<User> users = new ArrayList<>();
 
     @Override
-    public void createUser(User u) {
+    public User createUser(User u) {
         users.add(u);
+        return u;
     }
 
     @Override
-    public void editUser(User u) {
+    public User editUser(User u) {
         for(User user : users){
             if(user.getId() == u.getId()){
                 users.remove(user);
                 users.add(u);
             }
         }
+        return u;
     }
 
     @Override
-    public void removeUser(User u) {
+    public boolean removeUser(User u) {
         users.remove(u);
+        return true;
     }
 
     @Override
@@ -60,18 +64,18 @@ public class UserDAOTest implements UserDAO {
     }
 
     @Override
-    public void addFollower(String emailFollower, String emailFollowing) {
-
+    public Follower addFollower(String emailFollower, String emailFollowing) {
+        return new Follower();
     }
 
     @Override
-    public void removeFollower(Follower follower, Following following) {
-
+    public boolean removeFollower(Follower follower, Following following) {
+        return true;
     }
 
     @Override
-    public void removeFollowing(Following following, Follower follower) {
-
+    public boolean removeFollowing(Following following, Follower follower) {
+        return true;
     }
 
     @Override
@@ -81,6 +85,21 @@ public class UserDAOTest implements UserDAO {
 
     @Override
     public Following getFollowingByEmail(String email) {
+        return null;
+    }
+
+    @Override
+    public User login(String email, String password) {
+        return null;
+    }
+
+    @Override
+    public Token addToken(Token token) {
+        return null;
+    }
+
+    @Override
+    public Token getToken(String token) {
         return null;
     }
 

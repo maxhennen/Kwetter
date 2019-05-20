@@ -2,6 +2,7 @@ package dao.user;
 
 import domain.Follower;
 import domain.Following;
+import domain.Token;
 import domain.User;
 
 import java.util.List;
@@ -14,21 +15,21 @@ public interface UserDAO {
      *
      * @param u
      */
-    void createUser(User u);
+    User createUser(User u);
 
     /**
      * Edits a User object
      *
      * @param u
      */
-    void editUser(User u);
+    User editUser(User u);
 
     /**
      * Removes a User object
      *
      * @param u
-     */
-    void removeUser(User u);
+     **/
+    boolean removeUser(User u);
 
     /**
      * Retrieves all users from the kwetter application
@@ -65,21 +66,21 @@ public interface UserDAO {
      * @param emailFollower
      * @param emailFollowing
      */
-    void addFollower(String emailFollower, String emailFollowing);
+    Follower addFollower(String emailFollower, String emailFollowing);
 
     /**
      * Remove follower
      * @param follower
      * @param following
      */
-    void removeFollower(Follower follower, Following following);
+    boolean removeFollower(Follower follower, Following following);
 
     /**
      * Remove following
      * @param following
      * @param follower
      */
-    void removeFollowing(Following following, Follower follower);
+    boolean removeFollowing(Following following, Follower follower);
 
     /**
      * Get a follower by email
@@ -94,5 +95,11 @@ public interface UserDAO {
      * @return
      */
     Following getFollowingByEmail(String email);
+
+    User login(String email, String password);
+
+    Token addToken(Token token);
+
+    Token getToken(String token);
 
 }

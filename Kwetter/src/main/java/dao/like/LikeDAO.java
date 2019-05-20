@@ -9,7 +9,7 @@ public interface LikeDAO {
     /**
      * Creates a new Like object
      */
-    void create(Like l);
+    Like create(Like l);
 
 
 
@@ -18,7 +18,7 @@ public interface LikeDAO {
      *
      * @param l
      */
-    void removeLike(Like l);
+    Like removeLike(Like l);
 
 
     /**

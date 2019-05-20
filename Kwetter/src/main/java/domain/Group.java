@@ -38,4 +38,12 @@ public class Group implements Serializable {
     public void setGroupname(String groupname) {
         this.groupname = groupname;
     }
+
+    @Override
+    public String toString() {
+        return "Group{" +
+                "email='" + email + '\'' +
+                ", groupname='" + groupname + '\'' +
+                '}';
+    }
 }

@@ -9,8 +9,12 @@
         <class>domain.Like</class>
         <class>domain.Details</class>
         <class>domain.Location</class>
+        <class>domain.Following</class>
+        <class>domain.Follower</class>
+        <class>domain.Token</class>
 
         <properties>
+            <property name="hibernate.id.new_generator_mappings" value="false"/>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
         </properties>
     </persistence-unit>

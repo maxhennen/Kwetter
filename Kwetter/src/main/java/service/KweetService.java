@@ -7,6 +7,7 @@ import domain.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Path;
 import java.util.List;
 
 @Stateless
@@ -40,30 +41,24 @@ public class KweetService {
      * saves a kweet and add it to the user
      * @param kweet
      */
-    public void createKweet(Kweet kweet){
-        User user = kweet.getUser();
-        user.addKweet(kweet);
-        kweetDAO.create(kweet);
-        userDAO.editUser(user);
+    public Kweet createKweet(Kweet kweet){
+        return kweetDAO.create(kweet);
     }
 
     /**
      * Updates a kweet
      * @param kweet
      */
-    public void editKweet(Kweet kweet){
-        kweetDAO.edit(kweet);
+    public Kweet editKweet(Kweet kweet){
+        return kweetDAO.edit(kweet);
     }
 
     /**
      * Removes kweet
      * @param kweet
      */
-    public void removeKweet(Kweet kweet){
-        User user = kweet.getUser();
-        user.removeKweet(kweet);
-        userDAO.editUser(user);
-        kweetDAO.removeKweet(kweet);
+    public boolean removeKweet(Kweet kweet){
+        return kweetDAO.removeKweet(kweet);
     }
 
     /**

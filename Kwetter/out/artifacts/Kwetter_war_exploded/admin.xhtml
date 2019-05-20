@@ -39,7 +39,7 @@
                         Save
                     </f:facet>
                     <h:form>
-                        <h:commandButton action="#{adminView.edit(user.email, adminView.selectedGroup)}" value="Change" update="pgAdmin"/>
+                        <h:commandButton action="#{adminView.edit(user.email, adminView.selectedGroup.groupname)}" value="Change" update="pgAdmin"/>
                     </h:form>
                 </h:column>
             </h:dataTable>
