@@ -17,8 +17,15 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.8'
     jdkArchitectureOption: 'x64'
-    publishJUnitResults: false
+    publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
     mavenDirectory: 'Kwetter'
+    codeCoverageToolOption: 'None'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    sqMavenPluginVersionChoice: 'latest'
+    checkStyleRunAnalysis: false
+    pmdRunAnalysis: false
+    findBugsRunAnalysis: false
 
