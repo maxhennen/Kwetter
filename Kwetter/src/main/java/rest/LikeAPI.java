@@ -10,17 +10,16 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@Path("/like")
 @Stateless
-@Produces(APPLICATION_JSON)
-@Consumes({APPLICATION_JSON, APPLICATION_FORM_URLENCODED})
+@Path("like")
+@Produces({MediaType.APPLICATION_JSON})
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
 @Secured
 public class LikeAPI extends Application {
 
@@ -34,7 +33,6 @@ public class LikeAPI extends Application {
     private KweetService kweetService;
 
     @GET
-    @Path("/findAll")
     public Response findAll(){
         List<Like> likes = likeService.findALlLikes();
         if (likes != null && !likes.isEmpty()){
@@ -45,7 +43,6 @@ public class LikeAPI extends Application {
     }
 
     @POST
-    @Path("/save")
     public Response save(@FormParam("email") String email, @FormParam("id") long kweetId){
         Like like = new Like(LocalDateTime.now(), userService.findByEmail(email), kweetId);
         if(likeService.createLike(like) != null){
@@ -56,7 +53,7 @@ public class LikeAPI extends Application {
     }
 
     @GET
-    @Path("/findOneById{id}")
+    @Path("{id}")
     public Response findOneById(@PathParam("id") long id){
         Like like = likeService.getById(id);
         if(like != null){
@@ -67,7 +64,7 @@ public class LikeAPI extends Application {
     }
 
     @DELETE
-    @Path("/delete/{id}")
+    @Path("{id}")
     public Response delete(@PathParam("id") long id){
         if(likeService.removeLike(likeService.getById(id)) != null){
             return Response.ok().entity("Like is removed").build();

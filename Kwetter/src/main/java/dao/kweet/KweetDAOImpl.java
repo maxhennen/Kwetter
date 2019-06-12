@@ -57,7 +57,7 @@ public class KweetDAOImpl implements KweetDAO {
     @Override
     public Kweet get(long id) {
         try {
-            return (Kweet) em.createNamedQuery("Kweet.getByID").getSingleResult();
+            return (Kweet) em.find(Kweet.class, id);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

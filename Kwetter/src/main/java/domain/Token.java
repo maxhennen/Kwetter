@@ -1,5 +1,7 @@
 package domain;
 
+import jdk.nashorn.internal.ir.annotations.Ignore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,9 +19,13 @@ public class Token implements Serializable {
     @Column(name = "expirationTime")
     private LocalDateTime expirationTime;
 
-    public Token(String token, LocalDateTime expirationTime) {
+    @Ignore
+    private String role;
+
+    public Token(String token, LocalDateTime expirationTime, String role) {
         this.token = token;
         this.expirationTime = expirationTime;
+        this.role =role;
     }
 
     public Token() {

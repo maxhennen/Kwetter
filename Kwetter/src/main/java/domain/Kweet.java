@@ -28,6 +28,8 @@ public class Kweet implements Serializable {
     @Column(name = "emailUser")
     private String emailUser;
 
+    private List<Link> links = new ArrayList<>();
+
     public Kweet(LocalDateTime dateTime, String content, String emailUser) {
         DateTime = dateTime;
         this.content = content;
@@ -76,6 +78,27 @@ public class Kweet implements Serializable {
 
     public void setUser(String user) {
         this.emailUser = user;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
+    }
+
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public void addLink(String url, String rel){
+        Link link = new Link(url, rel);
+        links.add(link);
     }
 
     @Override

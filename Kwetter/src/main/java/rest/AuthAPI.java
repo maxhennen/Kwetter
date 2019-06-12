@@ -3,28 +3,27 @@ package rest;
 import authentication.RandomToken;
 import domain.Token;
 import domain.User;
+import service.GroupService;
 import service.KweetService;
 import service.UserService;
 import utils.AuthenticationUtils;
 import utils.EmailSender;
 import utils.LoginResponse;
+import websockets.SessionListener;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.mail.MessagingException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
-import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
-import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
-@Path("/auth")
-@Consumes({APPLICATION_JSON, APPLICATION_FORM_URLENCODED})
+@Stateless
+@Path("auth")
+@Produces({MediaType.APPLICATION_JSON})
+@Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_FORM_URLENCODED})
 public class AuthAPI extends Application {
-
-    @Context
-    private UriInfo uriInfo;
 
     @Inject
     private UserService userService;
@@ -35,17 +34,18 @@ public class AuthAPI extends Application {
     @Inject
     private EmailSender emailSender;
 
+    @Inject
+    private GroupService groupService;
+
     @POST
-    @Path("token")
-    @Produces(APPLICATION_JSON)
-    public Response authorize(@FormParam("email") String email, @FormParam("password") String password){
+    public Response token(@FormParam("email") String email, @FormParam("password") String password){
 
         try {
             User user = authenticate(email, password);
 
-            String token = getToken();
+            String token = new RandomToken().createJWT(user);
 
-            userService.addToken(new Token(token, LocalDateTime.now().plusMinutes(60)));
+            userService.addToken(new Token(token, LocalDateTime.now().plusMinutes(60), groupService.getGroupByName(user.getEmail()).getGroupname()));
 
             return Response.ok(new LoginResponse(token, user)).build();
         } catch (Exception e){
@@ -63,17 +63,27 @@ public class AuthAPI extends Application {
         user.setKweets(kweetService.getKweetsByEmail(email));
         user.setFollowers(userService.getFollowers(user));
         user.setFollowings(userService.getFollowing(user));
+
+        if (!SessionListener.getInstance().getActiveUsers().contains(email)) {
+            SessionListener.getInstance().getActiveUsers().add(email);
+        }
+
         return user;
     }
 
-    private String getToken(){
-        RandomToken token = new RandomToken();
-        return token.nextString();
+    @POST
+    @Path("logout")
+    public void logout(@FormParam("email") String email) {
+        try {
+            SessionListener.getInstance().getActiveUsers().remove(email);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @POST
-    @Path("/createUser")
-    public Response save(User user){
+    @Path("create")
+    public Response createUser(User user){
         if(userService.createUser(user) != null){
 //            try {
 //                emailSender.sendMail(user);
