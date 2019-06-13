@@ -1,23 +1,18 @@
 package websockets;
 
 import authentication.Secured;
-import domain.Kweet;
-import domain.Like;
 import domain.User;
 import service.KweetService;
 import service.UserService;
 
 import javax.inject.Inject;
-import javax.websocket.*;
+import javax.websocket.OnClose;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
 
 @Secured
 @ServerEndpoint(value = "/socket/{email}")

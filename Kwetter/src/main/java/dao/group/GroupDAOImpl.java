@@ -1,14 +1,12 @@
 package dao.group;
 
 
-
 import domain.Group;
 
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 @Stateless
@@ -31,7 +29,6 @@ public class GroupDAOImpl implements GroupDAO {
                     .setParameter("email", email).getSingleResult();
             return (Group) o;
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
 

@@ -4,7 +4,7 @@ import domain.Follower;
 import domain.Following;
 import domain.Token;
 import domain.User;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.hibernate.cfg.NotYetImplementedException;
 
 import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
@@ -55,12 +55,12 @@ public class UserDAOTest implements UserDAO {
 
     @Override
     public List<User> getAllFollowing(User u) {
-        throw  new NotImplementedException();
+        throw  new NotYetImplementedException();
     }
 
     @Override
     public List<User> getAllFollowers(User u) {
-        throw  new NotImplementedException();
+        throw  new NotYetImplementedException();
     }
 
     @Override

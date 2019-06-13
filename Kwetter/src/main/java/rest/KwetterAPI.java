@@ -1,22 +1,13 @@
 package rest;
 
-import authentication.RandomToken;
 import authentication.Secured;
 import domain.Kweet;
-import domain.Token;
-import domain.User;
-import org.glassfish.jersey.server.Uri;
 import service.KweetService;
-import service.UserService;
-import utils.AuthenticationUtils;
-import utils.EmailSender;
-import utils.LoginResponse;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.List;
 

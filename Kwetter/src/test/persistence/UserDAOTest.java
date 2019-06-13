@@ -9,9 +9,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.persistence.EntityManager;
-import javax.swing.text.html.parser.Entity;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)

@@ -10,7 +10,6 @@ import javax.annotation.PreDestroy;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -21,15 +20,12 @@ public class UserDAOImpl implements UserDAO{
     @PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;
 
+    private static String emailParameter = "email";
+
     @Override
     public User createUser(User u) {
         u.setPassword(AuthenticationUtils.encodeSHA256(u.getPassword()));
-        try {
-            em.persist(u);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        em.persist(u);
         return u;
     }
 
@@ -52,25 +48,20 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public User findUserByEmail(String email) {
-        try {
-            return (User)em.createNamedQuery("User.findByEmail")
-                    .setParameter("email", email).getSingleResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return (User)em.createNamedQuery("User.findByEmail")
+                .setParameter(emailParameter, email).getSingleResult();
     }
 
     @Override
     public List<User> getAllFollowing(User u) {
         return (List<User>) em.createNamedQuery("User.getFollowing")
-                .setParameter("email", u.getEmail()).getResultList();
+                .setParameter(emailParameter, u.getEmail()).getResultList();
     }
 
     @Override
     public List<User> getAllFollowers(User u) {
         return (List<User>) em.createNamedQuery("User.getFollowers")
-                .setParameter("email", u.getEmail()).getResultList();
+                .setParameter(emailParameter, u.getEmail()).getResultList();
     }
 
     @Override
@@ -108,56 +99,39 @@ public class UserDAOImpl implements UserDAO{
         Following following1 = em.find(Following.class, following);
         Follower follower1 = em.find(Follower.class, follower);
 
-        if(follower1 == null && following1 == null){
-            return true;
-        } else {
-            return false;
-        }
+        return follower1 == null && following1 == null;
     }
 
     @Override
     public Follower getFollowerByEmail(String email) {
         return (Follower)em.createNamedQuery("User.getFollowerByEmail")
-                .setParameter("email", email);
+                .setParameter(emailParameter, email);
     }
 
     @Override
     public Following getFollowingByEmail(String email) {
         return (Following) em.createNamedQuery("User.getFollowingByEmail")
-                .setParameter("email", email);
+                .setParameter(emailParameter, email);
     }
 
     @Override
     public User login(String email, String password) {
-        try {
-            return (User) em.createNamedQuery("User.login")
-                    .setParameter("email", email)
-                    .setParameter("password", password)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+        return (User) em.createNamedQuery("User.login")
+                .setParameter(emailParameter, email)
+                .setParameter("password", password)
+                .getSingleResult();
     }
 
     @Override
     public Token addToken(Token token) {
-        try {
-            em.persist(token);
-            return token;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        em.persist(token);
+        return token;
     }
 
     @Override
     public Token getToken(String token) {
-        try{
-            return (Token) em.createNamedQuery("User.getToken")
-                    .setParameter("token", token).getSingleResult();
-        } catch (NoResultException e){
-            return null;
-        }
+        return (Token) em.createNamedQuery("User.getToken")
+                .setParameter("token", token).getSingleResult();
     }
 
     @PreDestroy

@@ -17,15 +17,15 @@ public class Location implements Serializable {
     @Column(name = "street")
     private String street;
     @Column(name = "house_number")
-    private String house_number;
+    private String housenumber;
     @OneToOne
     private Details details;
 
-    public Location(String country, String city, String street, String house_number) {
+    public Location(String country, String city, String street, String housenumber) {
         this.country = country;
         this.city = city;
         this.street = street;
-        this.house_number = house_number;
+        this.housenumber = housenumber;
     }
 
     public Location() {
@@ -43,8 +43,8 @@ public class Location implements Serializable {
         return street;
     }
 
-    public String getHouse_number() {
-        return house_number;
+    public String getHousenumber() {
+        return housenumber;
     }
 
     public void setId(long id) {
@@ -63,8 +63,8 @@ public class Location implements Serializable {
         this.street = street;
     }
 
-    public void setHouse_number(String house_number) {
-        this.house_number = house_number;
+    public void setHousenumber(String house_number) {
+        this.housenumber = house_number;
     }
 
     public Details getDetails() {
@@ -81,7 +81,7 @@ public class Location implements Serializable {
                 "country='" + country + '\'' +
                 ", city='" + city + '\'' +
                 ", street='" + street + '\'' +
-                ", house_number='" + house_number + '\'' +
+                ", house_number='" + housenumber + '\'' +
                 '}';
     }
 }

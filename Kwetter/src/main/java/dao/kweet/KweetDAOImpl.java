@@ -4,14 +4,9 @@ package dao.kweet;
 import domain.Kweet;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Alternative;
 import javax.enterprise.inject.Default;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 
@@ -46,33 +41,20 @@ public class KweetDAOImpl implements KweetDAO {
 
     @Override
     public List<Kweet> findAll() {
-        try {
-            return em.createNamedQuery("Kweet.findAll").getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return em.createNamedQuery("Kweet.findAll").getResultList();
     }
 
     @Override
     public Kweet get(long id) {
-        try {
-            return (Kweet) em.find(Kweet.class, id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return em.find(Kweet.class, id);
     }
 
     @Override
     public List<Kweet> getKweetsByEmail(String email) {
-        try {
-            return em.createNamedQuery("Kweet.getKweetsByEmail")
-                    .setParameter("email", email).getResultList();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+
+        return em.createNamedQuery("Kweet.getKweetsByEmail")
+                .setParameter("email", email).getResultList();
+
     }
 
 }

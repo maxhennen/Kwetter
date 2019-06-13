@@ -6,9 +6,9 @@ import dao.user.UserDAO;
 import domain.*;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import javax.ejb.Singleton;
 import java.time.LocalDateTime;
 
 
@@ -76,7 +76,7 @@ public class JPALoader {
             groupDAO.create(new Group(user3.getEmail(), "ROLE_MOD"));
 
         } catch (Exception e) {
-            e.printStackTrace();
+            //error
         }
     }
 }

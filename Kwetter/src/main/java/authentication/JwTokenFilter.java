@@ -43,7 +43,6 @@ public class JwTokenFilter implements ContainerRequestFilter {
         try {
             validateToken(token);
         } catch (Exception e){
-            e.printStackTrace();
             abortWithUnauthorized(requestContext);
         }
     }

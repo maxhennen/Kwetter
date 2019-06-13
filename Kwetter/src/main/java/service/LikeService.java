@@ -1,8 +1,6 @@
 package service;
 
-import dao.kweet.KweetDAOImpl;
 import dao.like.LikeDAO;
-import dao.like.LikeDAOImpl;
 import dao.like.LikeDAOTest;
 import domain.Like;
 

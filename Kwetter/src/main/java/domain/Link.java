@@ -3,22 +3,22 @@ package domain;
 import java.io.Serializable;
 
 public class Link implements Serializable {
-    private String link;
+    private String url;
     private String rel;
 
     public Link(){}
 
-    public Link(String link, String rel) {
-        this.link = link;
+    public Link(String url, String rel) {
+        this.url = url;
         this.rel = rel;
     }
 
-    public String getLink() {
-        return link;
+    public String getUrl() {
+        return url;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getRel() {

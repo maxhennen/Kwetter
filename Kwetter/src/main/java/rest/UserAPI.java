@@ -1,7 +1,9 @@
 package rest;
 
 import authentication.Secured;
-import domain.*;
+import domain.Details;
+import domain.Location;
+import domain.User;
 import service.KweetService;
 import service.UserService;
 

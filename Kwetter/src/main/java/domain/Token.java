@@ -15,15 +15,15 @@ public class Token implements Serializable {
     private long id;
 
     @Column(name="token", unique = true)
-    private String token;
+    private String jwtoken;
     @Column(name = "expirationTime")
     private LocalDateTime expirationTime;
 
     @Ignore
     private String role;
 
-    public Token(String token, LocalDateTime expirationTime, String role) {
-        this.token = token;
+    public Token(String jwtoken, LocalDateTime expirationTime, String role) {
+        this.jwtoken = jwtoken;
         this.expirationTime = expirationTime;
         this.role =role;
     }
@@ -31,12 +31,12 @@ public class Token implements Serializable {
     public Token() {
     }
 
-    public String getToken() {
-        return token;
+    public String getJwtoken() {
+        return jwtoken;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setJwtoken(String token) {
+        this.jwtoken = token;
     }
 
     public LocalDateTime getExpirationTime() {

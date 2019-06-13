@@ -3,11 +3,9 @@ package service;
 import dao.kweet.KweetDAO;
 import dao.user.UserDAO;
 import domain.Kweet;
-import domain.User;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.ws.rs.Path;
 import java.util.List;
 
 @Stateless

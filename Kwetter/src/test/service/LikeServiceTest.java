@@ -1,11 +1,7 @@
 package service;
 
 import dao.like.LikeDAOTest;
-import domain.Kweet;
 import domain.Like;
-import domain.Details;
-import domain.Location;
-import domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,8 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.verify;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 
 @RunWith(MockitoJUnitRunner.class)

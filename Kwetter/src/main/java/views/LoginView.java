@@ -2,7 +2,6 @@ package views;
 
 import domain.User;
 import service.UserService;
-import utils.AuthenticationUtils;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;

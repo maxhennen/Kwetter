@@ -1,7 +1,7 @@
 package domain;
 
-import java.io.Serializable;
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="user_groups")

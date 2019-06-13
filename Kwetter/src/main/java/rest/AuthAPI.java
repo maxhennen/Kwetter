@@ -7,15 +7,15 @@ import service.GroupService;
 import service.KweetService;
 import service.UserService;
 import utils.AuthenticationUtils;
-import utils.EmailSender;
 import utils.LoginResponse;
 import websockets.SessionListener;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
-import java.io.IOException;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.time.LocalDateTime;
 
 
@@ -30,9 +30,6 @@ public class AuthAPI extends Application {
 
     @Inject
     private KweetService kweetService;
-
-    @Inject
-    private EmailSender emailSender;
 
     @Inject
     private GroupService groupService;
@@ -77,7 +74,7 @@ public class AuthAPI extends Application {
         try {
             SessionListener.getInstance().getActiveUsers().remove(email);
         } catch (Exception e){
-            e.printStackTrace();
+            //error
         }
     }
 
@@ -85,13 +82,6 @@ public class AuthAPI extends Application {
     @Path("create")
     public Response createUser(User user){
         if(userService.createUser(user) != null){
-//            try {
-//                emailSender.sendMail(user);
-//            } catch (MessagingException e) {
-//                e.printStackTrace();
-//            } catch (UnsupportedEncodingException e) {
-//                e.printStackTrace();
-//            }
             return Response.ok().entity(user).build();
         } else {
             return Response.status(409).build();

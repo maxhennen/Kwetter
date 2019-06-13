@@ -28,7 +28,7 @@ public class EmailSender {
         try {
             Transport.send(message);
         } catch (MessagingException e) {
-            e.printStackTrace();
+            //error
         }
 
     }

@@ -20,7 +20,6 @@ public class AuthenticationUtils {
             byte[] digest = md.digest();
             return DatatypeConverter.printBase64Binary(digest).toString();
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
-            e.printStackTrace();
             return null;
         }
     }

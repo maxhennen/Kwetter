@@ -17,7 +17,7 @@ import java.util.List;
         @NamedQuery(name = "User.getFollowerByEmail", query = "SELECT F FROM Follower F where F.emailFollower = :email"),
         @NamedQuery(name = "User.getFollowingByEmail", query = "SELECT F FROM Following F where F.emailFollowing = :email"),
         @NamedQuery(name = "User.login", query = "SELECT U FROM User U WHERE U.email = :email AND U.password = :password"),
-        @NamedQuery(name = "User.getToken", query = "SELECT T From Token T WHERE T.token = :token")
+        @NamedQuery(name = "User.getToken", query = "SELECT T From Token T WHERE T.jwtoken = :token")
 })
 public class User implements Serializable {
 
@@ -147,14 +147,5 @@ public class User implements Serializable {
         this.followers = followers;
     }
 
-    //    @Override
-//    public String toString() {
-//        return "User{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", email='" + email + '\'' +
-//                ", details=" + details +
-//                '}';
-//    }
 
 }

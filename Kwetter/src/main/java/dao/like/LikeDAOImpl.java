@@ -3,11 +3,9 @@ package dao.like;
 import domain.Like;
 
 import javax.ejb.Stateless;
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 @Stateless

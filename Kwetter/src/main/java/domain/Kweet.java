@@ -80,10 +80,6 @@ public class Kweet implements Serializable {
         this.emailUser = user;
     }
 
-    public String getEmailUser() {
-        return emailUser;
-    }
-
     public void setEmailUser(String emailUser) {
         this.emailUser = emailUser;
     }
