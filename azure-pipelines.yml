@@ -17,6 +17,9 @@ steps:
       SonarCloud: 'Kwetter'
       organization: 'maxhennen-github'
       scannerMode: 'Other'
+      cliProjectKey: 'assignment:Kwetter'
+      projectKey: 'assignment:Kwetter'
+      extraProperties: 'sonar.projectKey=assignment:Kwetter'
   - task: Maven@3
     inputs:
       mavenPomFile: 'Kwetter/pom.xml'
