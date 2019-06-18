@@ -20,7 +20,7 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-mvn sonar:sonar \
+mvn sonar:sonar
   -Dsonar.projectKey=maxhennen1_Kwetter 
   -Dsonar.organization=maxhennen1 
   -Dsonar.host.url=https://sonarcloud.io 
