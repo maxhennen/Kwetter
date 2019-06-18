@@ -8,24 +8,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b599efde-03a8-4ab5-a192-9cff090b4e0d" name="Default" comment="microservices">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/authentication/JwTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/authentication/JwTokenFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/authentication/RandomToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/authentication/RandomToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/group/GroupDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/group/GroupDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/kweet/KweetDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/kweet/KweetDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/user/UserDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/user/UserDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dao/user/UserDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/user/UserDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Kweet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Kweet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Link.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Link.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Location.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Location.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/Token.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/domain/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/domain/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/rest/AuthAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rest/AuthAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/AuthenticationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/AuthenticationUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/EmailSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/EmailSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/JPALoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/JPALoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/regdone.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/regdone.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/register.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/register.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/signin.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/web/signin.xhtml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -62,14 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/kweet/KweetDAOImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
-              <folding>
-                <element signature="e#984#985#0" expanded="true" />
-                <element signature="e#1059#1060#0" expanded="true" />
-                <element signature="e#1106#1107#0" expanded="true" />
-                <element signature="e#1157#1158#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="663">
+              <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -77,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/user/UserDAOImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="102" column="8" lean-forward="true" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="8" />
+            <state relative-caret-position="1496">
+              <caret line="101" column="8" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -89,7 +65,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/user/UserDAOTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="833">
               <caret line="62" column="45" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -101,16 +77,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/domain/Kweet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
+            <state relative-caret-position="952">
               <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2204#2205#0" expanded="true" />
-                <element signature="e#2246#2247#0" expanded="true" />
-                <element signature="e#2282#2283#0" expanded="true" />
-                <element signature="e#2310#2311#0" expanded="true" />
-                <element signature="e#2356#2357#0" expanded="true" />
-                <element signature="e#2390#2391#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -128,13 +98,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/domain/Location.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="27" column="39" lean-forward="true" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+            <state relative-caret-position="442">
+              <caret line="27" column="39" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/domain/Token.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="149">
@@ -146,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/domain/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
+            <state relative-caret-position="1802">
+              <caret line="148" selection-start-line="148" selection-end-line="148" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -159,10 +129,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/authentication/RandomToken.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/rest/AuthAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="1139">
+              <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -174,7 +144,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/dao/kweet/KweetDAO.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
+              <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -257,7 +227,6 @@
         <option value="$PROJECT_DIR$/src/main/java/authentication/TokenProvider.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/user/UserDAO.java" />
         <option value="$PROJECT_DIR$/web/WEB-INF/web.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/domain/User.java" />
         <option value="$PROJECT_DIR$/src/main/java/rest/LikeAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/filter/CORSFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/authentication/Secured.java" />
@@ -275,7 +244,6 @@
         <option value="$PROJECT_DIR$/src/main/java/rest/KwetterAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/authentication/JwTokenFilter.java" />
         <option value="$PROJECT_DIR$/src/main/java/dao/group/GroupDAOImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/rest/AuthAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/utils/AuthenticationUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/utils/EmailSender.java" />
         <option value="$PROJECT_DIR$/src/main/java/utils/JPALoader.java" />
@@ -287,6 +255,8 @@
         <option value="$PROJECT_DIR$/src/main/java/domain/Link.java" />
         <option value="$PROJECT_DIR$/src/main/java/domain/Location.java" />
         <option value="$PROJECT_DIR$/src/main/java/domain/Token.java" />
+        <option value="$PROJECT_DIR$/src/main/java/domain/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/rest/AuthAPI.java" />
       </list>
     </option>
   </component>
@@ -318,10 +288,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-10" />
+    <option name="width" value="979" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -329,7 +299,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -442,6 +411,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -452,7 +422,7 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://E:/Users/maxhe/Documents/School/Fontys Semester 6/JEA/Kwetter/src/domain/user/Role.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560412198287" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1560412234992" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
     <property name="dynamic.classpath" value="true" />
@@ -806,7 +776,9 @@
       <workItem from="1559812327028" duration="722000" />
       <workItem from="1560162052048" duration="32000" />
       <workItem from="1560337908086" duration="141000" />
-      <workItem from="1560411322608" duration="815000" />
+      <workItem from="1560411322608" duration="953000" />
+      <workItem from="1560589077459" duration="17000" />
+      <workItem from="1560843658732" duration="626000" />
     </task>
     <servers />
   </component>
@@ -843,7 +815,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="405998000" />
+    <option name="totallyTimeSpent" value="406779000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -855,10 +827,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="781" height="830" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.521197" visible="true" weight="0.38418862" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.521197" visible="true" weight="0.39530203" />
       <window_info id="Structure" order="1" sideWeight="0.37580645" side_tool="true" weight="0.14818764" />
       <window_info id="Persistence" order="2" sideWeight="0.37391305" side_tool="true" weight="0.18389262" />
       <window_info id="Designer" order="3" />
@@ -924,7 +896,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/test/service/KweetServiceTest.java</url>
-          <line>38</line>
+          <line>40</line>
           <properties />
           <option name="timeStamp" value="49" />
         </line-breakpoint>
@@ -1211,16 +1183,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/rest/AuthAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/utils/AuthenticationUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
@@ -1255,30 +1217,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/dao/kweet/KweetDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/kweet/KweetDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="53" column="8" selection-start-line="53" selection-start-column="8" selection-end-line="53" selection-end-column="8" />
-          <folding>
-            <element signature="e#984#985#0" expanded="true" />
-            <element signature="e#1059#1060#0" expanded="true" />
-            <element signature="e#1106#1107#0" expanded="true" />
-            <element signature="e#1157#1158#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="663">
+          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/user/UserDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="102" column="8" lean-forward="true" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="8" />
+        <state relative-caret-position="1496">
+          <caret line="101" column="8" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1287,7 +1236,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/dao/user/UserDAOTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
+        <state relative-caret-position="833">
           <caret line="62" column="45" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -1297,16 +1246,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/domain/Kweet.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
+        <state relative-caret-position="952">
           <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2204#2205#0" expanded="true" />
-            <element signature="e#2246#2247#0" expanded="true" />
-            <element signature="e#2282#2283#0" expanded="true" />
-            <element signature="e#2310#2311#0" expanded="true" />
-            <element signature="e#2356#2357#0" expanded="true" />
-            <element signature="e#2390#2391#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1320,8 +1263,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/domain/Location.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="27" column="39" lean-forward="true" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+        <state relative-caret-position="442">
+          <caret line="27" column="39" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/domain/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1802">
+          <caret line="148" selection-start-line="148" selection-end-line="148" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/rest/AuthAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="83" column="49" selection-start-line="83" selection-start-column="49" selection-end-line="83" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/dao/kweet/KweetDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" column="17" selection-start-line="6" selection-start-column="17" selection-end-line="6" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -1329,16 +1299,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="149">
           <caret line="17" column="24" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/domain/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="588">
-          <caret line="72" column="5" selection-start-line="72" selection-start-column="5" selection-end-line="72" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -21,7 +21,7 @@ public class Kweet implements Serializable {
     @Id
     private long id;
     @Column(name = "date_time")
-    private LocalDateTime DateTime;
+    private LocalDateTime dateTime;
     @Column(name = "content")
     private String content;
     private List<Like> likes;
@@ -31,7 +31,7 @@ public class Kweet implements Serializable {
     private List<Link> links = new ArrayList<>();
 
     public Kweet(LocalDateTime dateTime, String content, String emailUser) {
-        DateTime = dateTime;
+        this.dateTime = dateTime;
         this.content = content;
         this.emailUser = emailUser;
         likes = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Kweet implements Serializable {
     }
 
     public LocalDateTime getDateTime() {
-        return DateTime;
+        return dateTime;
     }
 
     public String getContent() {
@@ -65,7 +65,7 @@ public class Kweet implements Serializable {
     }
 
     public void setDateTime(LocalDateTime dateTime) {
-        DateTime = dateTime;
+        this.dateTime = dateTime;
     }
 
     public void setContent(String content) {
@@ -101,7 +101,7 @@ public class Kweet implements Serializable {
     public String toString() {
         return "Kweet{" +
                 "id=" + id +
-                ", DateTime=" + DateTime +
+                ", dateTime=" + dateTime +
                 ", content='" + content + '\'' +
                 '}';
     }
