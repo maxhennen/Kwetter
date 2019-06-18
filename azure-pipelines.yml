@@ -6,26 +6,33 @@
 trigger:
 - master
 
+pr: none
+
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'Kwetter/pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
-    mavenDirectory: 'Kwetter'
-    codeCoverageToolOption: 'None'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    sqMavenPluginVersionChoice: 'latest'
-    checkStyleRunAnalysis: false
-    pmdRunAnalysis: false
-    findBugsRunAnalysis: false
+  - task: SonarCloudPrepare@1
+    inputs:
+      SonarCloud: 'Kwetter'
+      organization: 'maxhennen-github'
+      scannerMode: 'Other'
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'Kwetter/pom.xml'
+      mavenOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      goals: 'package'
+      mavenDirectory: 'Kwetter'
+      codeCoverageToolOption: 'None'
+      mavenVersionOption: 'Default'
+      mavenAuthenticateFeed: false
+      sqMavenPluginVersionChoice: 'latest'
+  - task: SonarCloudPublish@1
+    inputs:
+      pollingTimeoutSec: '300'
 
